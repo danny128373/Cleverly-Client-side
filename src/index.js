@@ -1,10 +1,11 @@
 import React from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ReactDOM from 'react-dom'
-import App from './Cleverly'
+import Cleverly from './Cleverly'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <Cleverly />
+  </Router>,
   document.getElementById('root')
 )
