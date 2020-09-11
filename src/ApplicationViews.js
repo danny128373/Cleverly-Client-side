@@ -4,6 +4,10 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Home from './components/home/Home'
 import Main from './components/home/Main'
+import CommunityList from './components/communities/CommunityList'
+import PostForm from './components/posts/PostForm'
+import PostTextForm from './components/posts/PostTextForm'
+import CommunityForm from './components/communities/CommunityForm'
 
 
 export default function ApplicationViews(props) {
@@ -38,6 +42,34 @@ export default function ApplicationViews(props) {
             path='/'
             render={props => {
                 return <Main setIsLogged={setIsLogged} {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/communities'
+            render={props => {
+                return <CommunityList {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/newpostimage'
+            render={props => {
+                return <PostForm {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/newposttext'
+            render={props => {
+                return <PostTextForm {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/createcommunity'
+            render={props => {
+                return <CommunityForm {...props} />
             }}
         />
         </>

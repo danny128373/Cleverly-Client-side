@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
 import ApiManager from '../../api/ApiManager'
 
-export default function PostForm (props) {
+export default function PostTextForm (props) {
 
     const title = useRef()
-    const image = useRef()
+    const content = useRef()
     const [communities, setCommunities] = useState([{profile:{}}])
     const [communityId, setCommunityId] = useState({ community_id: "" })
     const [profile, setProfile] = useState({})
@@ -39,7 +39,7 @@ export default function PostForm (props) {
         if (isValid) {
             const post = {
                 title: title.current.value,
-                content: image.current.value,
+                content: content.current.value,
                 community_id: communityId.community_id,
                 profile_id: profile.id
             }
@@ -66,11 +66,11 @@ export default function PostForm (props) {
                         required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="image">Image</label>
-                    <input ref={image} id='image' type="text"
-                        name="image"
+                    <label htmlFor="content">Content</label>
+                    <input ref={content} id='content' type="text"
+                        name="content"
                         className="form-control"
-                        placeholder="image"
+                        placeholder="Content"
                     />
                 </fieldset>
                 <fieldset>
