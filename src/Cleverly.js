@@ -10,9 +10,11 @@ function Cleverly(props) {
 
   return (
     <>
-      <Route render={props => {
-        return <Navbar {...props} isLogged={isLogged} setIsLogged={setIsLogged} />
-      }} />
+    {isLogged ?
+    <Route render={props => {
+      return <Navbar {...props} isLogged={isLogged} setIsLogged={setIsLogged} />
+    }} />
+    : null}
       <ApplicationViews isLogged={isLogged} setIsLogged={setIsLogged} {...props}/>
     </>
   )    

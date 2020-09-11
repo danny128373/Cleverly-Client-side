@@ -18,7 +18,7 @@ export default function Login(props) {
         login(credentials)
             .then(() => {
                 props.setIsLogged(true)
-                props.history.push('/')
+                props.history.push('/home')
             })
     }
 
