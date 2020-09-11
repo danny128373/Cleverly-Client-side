@@ -17,15 +17,16 @@ export default function CommunityForm (props) {
     useEffect(getProfile, [])
 
     const onSubmitHandler = (e) => {
+        e.preventDefault()
         const community = {
             name: name.current.value,
             image: image.current.value,
             description: description.current.value,
             profile_id: profile.id
         }
-        ApiManager.postNewCommunity(community).then(e => {
-        })
-        props.history.push("/communities")
+        
+        ApiManager.postNewCommunity(community)
+        .then(props.history.push("/communities"))
     }
 
     return (

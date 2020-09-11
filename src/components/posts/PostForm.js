@@ -43,9 +43,10 @@ export default function PostForm (props) {
                 community_id: communityId.community_id,
                 profile_id: profile.id
             }
-            ApiManager.postNewPost(post).then(e => {
-            })
-            props.history.push("/communities")
+            
+            ApiManager.postNewPost(post)
+            
+            
         } else {
             e.preventDefault()
             alert("Please select the community you want to post to!")
