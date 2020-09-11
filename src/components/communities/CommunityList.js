@@ -5,7 +5,7 @@ import { Button } from 'reactstrap'
 
 export default function CommunityList(props) {
 
-    const [communities, setCommunities] = useState([{profile:{}}])
+    const [communities, setCommunities] = useState([{profile:{}, community:{}}])
     const [profile, setProfile] = useState({})
 
     const getProfile = () => {
