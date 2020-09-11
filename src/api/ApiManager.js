@@ -11,6 +11,16 @@ export default {
         })
             .then(response => response.json())
     },
+    getPosts() {
+        return fetch(`${remoteURL}/posts`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
     getCurrentUser() {
         return fetch(`${remoteURL}/profiles`, {
             "method": "GET",
