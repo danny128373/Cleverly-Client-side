@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'reactstrap'
 
 export default function Main(props) {
     return (
@@ -6,13 +7,13 @@ export default function Main(props) {
             <h1>Cleverly</h1>
             <img alt="" src=""/>
             <p>Super awesome slogan for Cleverly.</p>
-            <button onClick={() => props.history.push('/register')}>
+            <Button onClick={() => props.history.push('/register')}>
                 Register
-            </button>
+            </Button>
             <p>Already have an account?</p>
-            <button onClick={() => props.history.push('/login')}>
+            <Button onClick={() => props.history.push('/login')}>
                 Login
-            </button>
+            </Button>
         </div>
     )
 }
