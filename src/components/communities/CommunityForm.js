@@ -6,8 +6,6 @@ export default function CommunityForm (props) {
     const name = useRef()
     const image = useRef()
     const description = useRef()
-    const [communities, setCommunities] = useState([{profile:{}}])
-    const [communityId, setCommunityId] = useState({ community_id: "" })
     const [profile, setProfile] = useState({})
 
     const getProfile = () => {
@@ -16,15 +14,7 @@ export default function CommunityForm (props) {
         })
     }
 
-    // const getCommunities = () => {
-    //     ApiManager.getCommunities().then(communities => {
-    //     const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
-    //     setCommunities(communitiesByUser)
-    //     })
-    // }
-
     useEffect(getProfile, [])
-    // useEffect(getCommunities, [profile])
 
     const onSubmitHandler = (e) => {
         const community = {

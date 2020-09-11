@@ -8,6 +8,8 @@ import CommunityList from './components/communities/CommunityList'
 import PostForm from './components/posts/PostForm'
 import PostTextForm from './components/posts/PostTextForm'
 import CommunityForm from './components/communities/CommunityForm'
+import Account from './components/accounts/Account'
+import PostList from './components/posts/PostList'
 
 
 export default function ApplicationViews(props) {
@@ -46,9 +48,23 @@ export default function ApplicationViews(props) {
         />
         <Route
             exact
+            path='/account'
+            render={props => {
+                return <Account setIsLogged={setIsLogged} {...props} />
+            }}
+        />
+        <Route
+            exact
             path='/communities'
             render={props => {
                 return <CommunityList {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/communities/:communityId(\d+)'
+            render={props => {
+                return <PostList {...props} communityId={parseInt(props.match.params.communityId)} />
             }}
         />
         <Route
