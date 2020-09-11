@@ -7,6 +7,7 @@ import Main from './components/home/Main'
 import CommunityList from './components/communities/CommunityList'
 import PostForm from './components/posts/PostForm'
 import PostTextForm from './components/posts/PostTextForm'
+import CommunityForm from './components/communities/CommunityForm'
 
 
 export default function ApplicationViews(props) {
@@ -62,6 +63,13 @@ export default function ApplicationViews(props) {
             path='/newposttext'
             render={props => {
                 return <PostTextForm {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/createcommunity'
+            render={props => {
+                return <CommunityForm {...props} />
             }}
         />
         </>

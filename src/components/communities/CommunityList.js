@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ApiManager from '../../api/ApiManager'
 import CommunityCard from './CommunityCard'
+import { Button } from 'reactstrap'
 
 export default function CommunityList(props) {
 
@@ -25,7 +26,10 @@ export default function CommunityList(props) {
 
     return (
         <>
-            {communities.map(community => <CommunityCard key={community.id} community={community}/>)}
+        <Button onClick={()=>props.history.push('/createcommunity')}>
+            Create Community
+        </Button>
+        {communities.map(community => <CommunityCard key={community.id} community={community}/>)}
         </>
     )
 }

@@ -31,5 +31,16 @@ export default {
             },
             body: JSON.stringify(post)
         })
+    },
+    postNewCommunity(community) {
+        return fetch(`${remoteURL}/communities`, {
+            method: 'POST',
+            headers: {
+                'Content-type': "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
+            },
+            body: JSON.stringify(community)
+        })
     }
 }
