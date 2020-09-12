@@ -41,6 +41,16 @@ export default {
         })
             .then(response => response.json())
     },
+    getPost(postId) {
+        return fetch(`${remoteURL}/posts/${postId}`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
     postNewPost(post) {
         return fetch(`${remoteURL}/posts`, {
             method: 'POST',

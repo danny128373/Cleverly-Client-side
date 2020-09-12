@@ -11,6 +11,7 @@ import CommunityForm from './components/communities/CommunityForm'
 import Account from './components/accounts/Account'
 import PostList from './components/posts/PostList'
 import CommunityCard from './components/communities/CommunityCard'
+import PostDetail from './components/posts/PostDetail'
 
 
 export default function ApplicationViews(props) {
@@ -66,6 +67,13 @@ export default function ApplicationViews(props) {
             path='/communities/:communityId(\d+)'
             render={props => {
                 return <PostList {...props} communityId={parseInt(props.match.params.communityId)} />
+            }}
+        />
+        <Route
+            exact
+            path='/posts/:postId(\d+)'
+            render={props => {
+                return <PostDetail {...props} postId={parseInt(props.match.params.postId)} />
             }}
         />
         <Route
