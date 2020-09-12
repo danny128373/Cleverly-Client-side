@@ -10,6 +10,7 @@ import PostTextForm from './components/posts/PostTextForm'
 import CommunityForm from './components/communities/CommunityForm'
 import Account from './components/accounts/Account'
 import PostList from './components/posts/PostList'
+import CommunityCard from './components/communities/CommunityCard'
 
 
 export default function ApplicationViews(props) {
