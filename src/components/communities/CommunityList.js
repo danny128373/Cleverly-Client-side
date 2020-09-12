@@ -5,7 +5,7 @@ import { Button } from 'reactstrap'
 
 export default function CommunityList(props) {
 
-    const [communities, setCommunities] = useState([{profile:{}, community:{}}])
+    const [communities, setCommunities] = useState([{profile:{}, community:{community:{}}}])
     const [profile, setProfile] = useState({})
 
     const getProfile = () => {
@@ -29,7 +29,7 @@ export default function CommunityList(props) {
         <Button onClick={()=>props.history.push('/createcommunity')}>
             Create Community
         </Button>
-        {communities.map(community => <CommunityCard key={community.id} community={community}/>)}
+        {communities.map(community => <CommunityCard key={community.id} {...props} community={community}/>)}
         </>
     )
 }

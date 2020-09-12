@@ -1,14 +1,16 @@
 import ApiManager from "../../api/ApiManager"
+import PostCard from './PostCard'
 
 import React, {useState, useEffect} from 'react'
 
 export default function PostList (props) {
 
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([{community:{}, profile:{user:{}}}])
 
     const getPosts = () => {
-        ApiManager.getPosts(posts => {
-            setPosts(posts)
+        ApiManager.getPosts().then(posts => {
+            const postsByCommunity = posts.filter(post => post.community.id === props.communityId)
+            setPosts(postsByCommunity)
         })
     }
 
@@ -16,7 +18,7 @@ export default function PostList (props) {
 
     return (
         <>
-
+            {posts.map(post => <PostCard {...props} post={post} />)}
         </>
     )
 }
