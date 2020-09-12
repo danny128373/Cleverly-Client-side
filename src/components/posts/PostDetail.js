@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ApiManager from '../../api/ApiManager'
+import CommentList from '../comments/CommentList'
 
 export default function PostDetail(props) {
 
@@ -19,6 +20,7 @@ export default function PostDetail(props) {
             <p>By: {post.profile.user.username}</p>
             <p>{post.content}</p>
             <h3>Comments</h3>
+            <CommentList {...props}/>
         </>
     )
 }

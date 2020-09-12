@@ -12,6 +12,7 @@ import Account from './components/accounts/Account'
 import PostList from './components/posts/PostList'
 import CommunityCard from './components/communities/CommunityCard'
 import PostDetail from './components/posts/PostDetail'
+import CommentList from './components/comments/CommentList'
 
 
 export default function ApplicationViews(props) {
@@ -22,7 +23,7 @@ export default function ApplicationViews(props) {
         <>
         <Route
             exact
-            path="/login"
+            path='/login'
             render={props => {
                 return <Login setIsLogged={setIsLogged} {...props} />
             }}
@@ -97,6 +98,13 @@ export default function ApplicationViews(props) {
                 return <CommunityForm {...props} />
             }}
         />
+        {/* <Route
+            exact
+            path='/posts/comments/:postId(\+d)'
+            render={props => {
+                return <CommentList postId={parseInt(props.match.params.postId)} {...props} />
+            }}
+        /> */}
         </>
 
     )
