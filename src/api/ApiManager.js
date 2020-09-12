@@ -31,6 +31,16 @@ export default {
         })
             .then(response => response.json())
     },
+    getComments() {
+        return fetch(`${remoteURL}/comments`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
     getCurrentUser() {
         return fetch(`${remoteURL}/profiles`, {
             "method": "GET",
@@ -60,6 +70,17 @@ export default {
                 "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
             },
             body: JSON.stringify(post)
+        })
+    },
+    postNewComment(comment) {
+        return fetch(`${remoteURL}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-type': "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
+            },
+            body: JSON.stringify(comment)
         })
     },
     postNewCommunity(community) {
