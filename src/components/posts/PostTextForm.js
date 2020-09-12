@@ -4,8 +4,8 @@ import ApiManager from '../../api/ApiManager'
 export default function PostTextForm (props) {
 
     const title = useRef()
-    const content = useRef()
-    const [communities, setCommunities] = useState([{profile:{}}])
+    const image = useRef()
+    const [communities, setCommunities] = useState([{profile:{},community:{profile:{}}}])
     const [communityId, setCommunityId] = useState({ community_id: "" })
     const [profile, setProfile] = useState({})
     const [isValid, setIsValid] = useState(false)
@@ -18,6 +18,7 @@ export default function PostTextForm (props) {
 
     const getCommunities = () => {
         ApiManager.getCommunities().then(communities => {
+        console.log('profilecommunity', communities)
         const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
         setCommunities(communitiesByUser)
         })
@@ -26,7 +27,7 @@ export default function PostTextForm (props) {
     const handleCommunityChange = (event) => {
         const stateToChange = { ...communityId }
         stateToChange[event.target.id] = event.target.value
-        const community = communities.filter(community => community.name === stateToChange[event.target.id])
+        const community = communities.filter(community => community.community.name === stateToChange[event.target.id])
         stateToChange.community_id = community[0].id
         setCommunityId(stateToChange)
         setIsValid(true)
@@ -39,13 +40,13 @@ export default function PostTextForm (props) {
         if (isValid) {
             const post = {
                 title: title.current.value,
-                content: content.current.value,
+                content: image.current.value,
                 community_id: communityId.community_id,
                 profile_id: profile.id
             }
-            ApiManager.postNewPost(post).then(e => {
-            })
-            props.history.push("/communities")
+            
+            ApiManager.postNewPost(post)
+  
         } else {
             e.preventDefault()
             alert("Please select the community you want to post to!")
@@ -66,17 +67,17 @@ export default function PostTextForm (props) {
                         required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="content">Content</label>
-                    <input ref={content} id='content' type="text"
-                        name="content"
+                    <label htmlFor="image">Image</label>
+                    <input ref={image} id='image' type="text"
+                        name="image"
                         className="form-control"
-                        placeholder="Content"
+                        placeholder="image"
                     />
                 </fieldset>
                 <fieldset>
                     <select required onChange={handleCommunityChange} id="communityId">
                         <option>Select Community</option>
-                        {communities.map(community => <option key={community.id}>{community.name}</option>)}
+                        {communities.map(community => <option key={community.community.id}>{community.community.name}</option>)}
                     </select>
                 </fieldset>
                 <fieldset>

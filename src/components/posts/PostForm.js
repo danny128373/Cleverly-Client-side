@@ -5,7 +5,7 @@ export default function PostForm (props) {
 
     const title = useRef()
     const image = useRef()
-    const [communities, setCommunities] = useState([{profile:{}}])
+    const [communities, setCommunities] = useState([{profile:{},community:{profile:{}}}])
     const [communityId, setCommunityId] = useState({ community_id: "" })
     const [profile, setProfile] = useState({})
     const [isValid, setIsValid] = useState(false)
@@ -18,6 +18,7 @@ export default function PostForm (props) {
 
     const getCommunities = () => {
         ApiManager.getCommunities().then(communities => {
+        console.log('profilecommunity', communities)
         const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
         setCommunities(communitiesByUser)
         })
@@ -26,7 +27,7 @@ export default function PostForm (props) {
     const handleCommunityChange = (event) => {
         const stateToChange = { ...communityId }
         stateToChange[event.target.id] = event.target.value
-        const community = communities.filter(community => community.name === stateToChange[event.target.id])
+        const community = communities.filter(community => community.community.name === stateToChange[event.target.id])
         stateToChange.community_id = community[0].id
         setCommunityId(stateToChange)
         setIsValid(true)
@@ -45,8 +46,7 @@ export default function PostForm (props) {
             }
             
             ApiManager.postNewPost(post)
-            
-            
+  
         } else {
             e.preventDefault()
             alert("Please select the community you want to post to!")
@@ -77,7 +77,7 @@ export default function PostForm (props) {
                 <fieldset>
                     <select required onChange={handleCommunityChange} id="communityId">
                         <option>Select Community</option>
-                        {communities.map(community => <option key={community.id}>{community.name}</option>)}
+                        {communities.map(community => <option key={community.community.id}>{community.community.name}</option>)}
                     </select>
                 </fieldset>
                 <fieldset>
