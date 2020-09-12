@@ -28,7 +28,7 @@ export default function PostTextForm (props) {
         const stateToChange = { ...communityId }
         stateToChange[event.target.id] = event.target.value
         const community = communities.filter(community => community.community.name === stateToChange[event.target.id])
-        stateToChange.community_id = community[0].id
+        stateToChange.community_id = community[0].community.id
         setCommunityId(stateToChange)
         setIsValid(true)
     }
