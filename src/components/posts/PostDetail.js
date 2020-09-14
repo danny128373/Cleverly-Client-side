@@ -20,7 +20,7 @@ export default function PostDetail(props) {
             <p>By: {post.profile.user.username}</p>
             <p>{post.content}</p>
             <h3>Comments</h3>
-            <CommentList {...props}/>
+            <CommentList {...props} postId={props.postId}/>
         </>
     )
 }
