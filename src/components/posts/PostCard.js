@@ -7,7 +7,7 @@ export default function PostCard (props) {
         <>
             <h3>{props.post.title}</h3>
             <p>By: {props.post.profile.user.username}</p>
-            <p>{props.post.content}</p>
+            <img alt='content' src={props.post.content}/>
         <Link to={`/posts/${props.post.id}`}>
             <button>
                 Comments
