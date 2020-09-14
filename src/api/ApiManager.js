@@ -124,7 +124,7 @@ export default {
                 "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
             },
             body: JSON.stringify(object)
-        })
+        })  
     },
 
 }
