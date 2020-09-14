@@ -4,7 +4,7 @@ import ApiManager from '../../api/ApiManager'
 export default function PostForm (props) {
 
     const title = useRef()
-    const image = useRef()
+    const [image, setImage] = useState("")
     const [communities, setCommunities] = useState([{profile:{},community:{profile:{}}}])
     const [communityId, setCommunityId] = useState({ community_id: "" })
     const [profile, setProfile] = useState({})
@@ -24,6 +24,22 @@ export default function PostForm (props) {
         })
     }
 
+    const uploadImage = async event => {
+        const files = event.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'userImage')
+        console.log(files[0])
+        const res = await fetch('https://api.cloudinary.com/v1_1/dp5l2gxzh/image/upload',
+          {
+            method: 'POST',
+            body: data
+          }
+        )
+        const file = await res.json()
+        setImage(file.secure_url)
+      }
+
     const handleCommunityChange = (event) => {
         const stateToChange = { ...communityId }
         stateToChange[event.target.id] = event.target.value
@@ -37,10 +53,11 @@ export default function PostForm (props) {
     useEffect(getCommunities, [profile])
 
     const onSubmitHandler = (e) => {
+        e.preventDefault()
         if (isValid) {
             const post = {
                 title: title.current.value,
-                content: image.current.value,
+                content: image,
                 community_id: communityId.community_id,
                 profile_id: profile.id
             }
@@ -48,7 +65,7 @@ export default function PostForm (props) {
             ApiManager.postNewPost(post)
   
         } else {
-            e.preventDefault()
+            
             alert("Please select the community you want to post to!")
         }
     }
@@ -68,7 +85,7 @@ export default function PostForm (props) {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="image">Image</label>
-                    <input ref={image} id='image' type="text"
+                    <input onChange={uploadImage} id='image' type="file"
                         name="image"
                         className="form-control"
                         placeholder="image"

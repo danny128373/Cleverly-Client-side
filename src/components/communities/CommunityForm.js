@@ -16,7 +16,6 @@ export default function CommunityForm (props) {
             description: description.current.value,
             profile_id: profile.id
         }
-        
         ApiManager.postNewCommunity(community)
         .then(props.history.push("/communities"))
     }
