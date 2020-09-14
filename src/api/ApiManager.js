@@ -22,7 +22,7 @@ export default {
             .then(response => response.json())
     },
     getSearchedCommunities(event, search) {
-        return fetch(`${remoteURL}/communities?name=${search}`, {
+        return fetch(`${remoteURL}/communities?search=${search}`, {
             "method": "GET",
             "headers": {
                 "Accept": "application/json",

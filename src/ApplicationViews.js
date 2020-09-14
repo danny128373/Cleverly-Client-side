@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Route } from 'react-router-dom'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -10,15 +10,25 @@ import PostTextForm from './components/posts/PostTextForm'
 import CommunityForm from './components/communities/CommunityForm'
 import Account from './components/accounts/Account'
 import PostList from './components/posts/PostList'
-import CommunityCard from './components/communities/CommunityCard'
 import PostDetail from './components/posts/PostDetail'
-import CommentList from './components/comments/CommentList'
-import SearchResultsCommunityCard from './components/communities/SearchResultsCommunityCard'
+import ApiManager from './api/ApiManager'
+import SearchResultsCommunity from './components/communities/SearchResultsCommunity'
+import Searchbar from './components/home/Searchbar'
 
 
 export default function ApplicationViews(props) {
 
     const setIsLogged = props.setIsLogged
+    const search = useRef()
+    const [communities, setCommunities] = useState([{profile:{}, community:{community:{}}}])
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault()
+        ApiManager.getSearchedCommunities(e, search.current.value).then(communities => {
+            setCommunities(communities)
+        }).then(props.history.push('/search')
+        )
+    }
 
     return (
         <>
@@ -40,7 +50,13 @@ export default function ApplicationViews(props) {
             exact
             path='/home'
             render={props => {
-                return <Home setIsLogged={setIsLogged} {...props} />
+                return (
+                    <>
+                        <h1>Welcome to Cleverly!</h1>
+                        <Searchbar handleSearchSubmit={handleSearchSubmit} search={search} {...props}/>
+                        <Home setIsLogged={setIsLogged} {...props} />
+                    </>
+                )
             }}
         />
         <Route
@@ -103,7 +119,12 @@ export default function ApplicationViews(props) {
             exact
             path='/search'
             render={props => {
-                return <SearchResultsCommunityCard {...props} />
+                return (
+                    <>
+                        <Searchbar handleSearchSubmit={handleSearchSubmit} search={search} {...props}/>
+                        <SearchResultsCommunity communities={communities} {...props} />
+                    </>
+                )
             }}
         />
         </>

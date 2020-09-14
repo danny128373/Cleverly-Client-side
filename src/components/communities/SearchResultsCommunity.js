@@ -5,8 +5,8 @@ import SearchResultsCommunityCard from './SearchResultsCommunityCard'
 export default function SearchResultsCommunity(props)  {
 
     return (
-        <>
-            <SearchResultsCommunityCard communities={props.communities} {...props}/>
-        </>
+        <div>
+            {props.communities.map(community => <SearchResultsCommunityCard {...props} community={community}/>)}
+        </div>
     )
 }
