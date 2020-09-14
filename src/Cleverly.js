@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import ApplicationViews from './ApplicationViews'
 import Navbar from './components/navbar/Navbar'
 import Main from './components/home/Main'
@@ -20,5 +20,5 @@ function Cleverly(props) {
   )    
 }
 
-export default Cleverly
+export default withRouter(Cleverly)
 
