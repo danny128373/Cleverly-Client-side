@@ -4,23 +4,15 @@ import ApiManager from '../../api/ApiManager'
 export default function CommunityForm (props) {
 
     const name = useRef()
-    const image = useRef()
     const description = useRef()
-    const [profile, setProfile] = useState({})
-
-    const getProfile = () => {
-        ApiManager.getCurrentUser().then(profile => {
-            setProfile(profile[0])
-        })
-    }
-
-    useEffect(getProfile, [])
+    const [profile, setProfile] = useState({user:{}})
+    const [image, setImage] = useState("")
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
         const community = {
             name: name.current.value,
-            image: image.current.value,
+            image: image,
             description: description.current.value,
             profile_id: profile.id
         }
@@ -28,6 +20,29 @@ export default function CommunityForm (props) {
         ApiManager.postNewCommunity(community)
         .then(props.history.push("/communities"))
     }
+
+    const uploadImage = async event => {
+        const files = event.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'userImage')
+        const res = await fetch('https://api.cloudinary.com/v1_1/dp5l2gxzh/image/upload',
+          {
+            method: 'POST',
+            body: data
+          }
+        )
+        const file = await res.json()
+        setImage(file.secure_url)
+      }
+
+    const getProfile = () => {
+        ApiManager.getCurrentUser().then(profiles => {
+            setProfile(profiles[0])
+        })
+    }
+
+    useEffect(getProfile, [])
 
     return (
         <>
@@ -44,7 +59,7 @@ export default function CommunityForm (props) {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="image">Image</label>
-                    <input ref={image} id='image' type="text"
+                    <input onChange={uploadImage} id='image' type="file"
                         name="image"
                         className="form-control"
                         placeholder="image"
