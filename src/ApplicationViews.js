@@ -20,7 +20,6 @@ export default function ApplicationViews(props) {
 
     const setIsLogged = props.setIsLogged
     const search = useRef()
-    
     const [communities, setCommunities] = useState([{profile:{}, community:{community:{}}}])
 
     const handleSearchSubmit = (e) => {
@@ -60,13 +59,16 @@ export default function ApplicationViews(props) {
                 )
             }}
         />
-        <Route
-            exact
-            path='/'
-            render={props => {
-                return <Main setIsLogged={setIsLogged} {...props} />
-            }}
-        />
+        {!setIsLogged ?
+            <Route
+                exact
+                path='/'
+                render={props => {
+                    return <Main setIsLogged={setIsLogged} {...props} />
+                }}
+            />
+        : null}
+        
         <Route
             exact
             path='/account'

@@ -9,7 +9,6 @@ function Register(props) {
     const lastName = useRef()
     const password = useRef()
     const firstName = useRef()
-    const image = useRef()
     const about = useRef()
     const verifyPassword = useRef()
     const { register } = useSimpleAuth()
@@ -24,13 +23,13 @@ function Register(props) {
             "email": email.current.value,
             "password": password.current.value,
             "about": about.current.value,
-            "profile_image":image.current.value,
+            "profile_image":"",
             "likes": 0
         }
 
         register(newUser).then(() => {
             props.setIsLogged(true)
-            props.history.push('/')
+            props.history.push('/home')
         })
     }
 
@@ -75,14 +74,6 @@ function Register(props) {
                     name="about"
                     className="form-control"
                     placeholder="About"
-                    required />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="image"> Profile Image </label>
-                <input ref={image} type="text"
-                    name="image"
-                    className="form-control"
-                    placeholder="Profile Image"
                     required />
             </fieldset>
             <fieldset>
