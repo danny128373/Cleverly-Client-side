@@ -20,6 +20,7 @@ export default function ApplicationViews(props) {
 
     const setIsLogged = props.setIsLogged
     const search = useRef()
+    
     const [communities, setCommunities] = useState([{profile:{}, community:{community:{}}}])
 
     const handleSearchSubmit = (e) => {
