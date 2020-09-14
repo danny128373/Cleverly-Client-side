@@ -21,6 +21,16 @@ export default {
         })
             .then(response => response.json())
     },
+    getSearchedCommunities(event, search) {
+        return fetch(`${remoteURL}/communities?name=${search}`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
     getPosts() {
         return fetch(`${remoteURL}/posts`, {
             "method": "GET",

@@ -13,6 +13,7 @@ import PostList from './components/posts/PostList'
 import CommunityCard from './components/communities/CommunityCard'
 import PostDetail from './components/posts/PostDetail'
 import CommentList from './components/comments/CommentList'
+import SearchResultsCommunityCard from './components/communities/SearchResultsCommunityCard'
 
 
 export default function ApplicationViews(props) {
@@ -98,13 +99,13 @@ export default function ApplicationViews(props) {
                 return <CommunityForm {...props} />
             }}
         />
-        {/* <Route
+        <Route
             exact
-            path='/posts/comments/:postId(\+d)'
+            path='/search'
             render={props => {
-                return <CommentList postId={parseInt(props.match.params.postId)} {...props} />
+                return <SearchResultsCommunityCard {...props} />
             }}
-        /> */}
+        />
         </>
 
     )
