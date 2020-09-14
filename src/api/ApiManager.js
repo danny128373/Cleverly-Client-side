@@ -114,5 +114,17 @@ export default {
             },
             body: JSON.stringify(community)
         })
-    }
+    },
+    update(object, collection) {
+        return fetch(`${remoteURL}/${collection}/${object.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
+            },
+            body: JSON.stringify(object)
+        })
+    },
+
 }
