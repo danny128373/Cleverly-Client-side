@@ -15,6 +15,7 @@ import ApiManager from './api/ApiManager'
 import SearchResultsCommunity from './components/communities/SearchResultsCommunity'
 import Searchbar from './components/home/Searchbar'
 import AccountEditForm from './components/accounts/AccountEditForm'
+import PostEditForm from './components/posts/PostEditForm'
 
 
 export default function ApplicationViews(props) {
@@ -117,6 +118,13 @@ export default function ApplicationViews(props) {
             path='/newposttext'
             render={props => {
                 return <PostTextForm {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/posts/edit/:postId(\d+)'
+            render={props => {
+                return <PostEditForm postId={parseInt(props.match.params.postId)} {...props} />
             }}
         />
         <Route
