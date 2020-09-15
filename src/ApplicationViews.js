@@ -14,6 +14,7 @@ import PostDetail from './components/posts/PostDetail'
 import ApiManager from './api/ApiManager'
 import SearchResultsCommunity from './components/communities/SearchResultsCommunity'
 import Searchbar from './components/home/Searchbar'
+import AccountEditForm from './components/accounts/AccountEditForm'
 
 
 export default function ApplicationViews(props) {
@@ -74,6 +75,13 @@ export default function ApplicationViews(props) {
             path='/account'
             render={props => {
                 return <Account setIsLogged={setIsLogged} {...props} />
+            }}
+        />
+        <Route
+            exact
+            path='/account/edit/:accountId'
+            render={props => {
+                return <AccountEditForm accountId={parseInt(props.match.params.accountId)} setIsLogged={setIsLogged} {...props} />
             }}
         />
         <Route
