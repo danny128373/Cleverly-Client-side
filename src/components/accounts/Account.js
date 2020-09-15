@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Button } from "reactstrap"
 import ApiManager from '../../api/ApiManager'
+import { Link } from 'react-router-dom'
 
 export default function Account(props) {
 
@@ -20,8 +21,8 @@ export default function Account(props) {
         )
         const file = await res.json()
         
-            ApiManager.update({ ...profile, profile_image: file.url },'profiles').then(e => {
-                setImage(file.secure_url)
+        ApiManager.update({ ...profile, profile_image: file.url },'profiles').then(e => {
+            setImage(file.secure_url)
         })
       }
 
@@ -29,6 +30,10 @@ export default function Account(props) {
         ApiManager.getCurrentUser().then(profiles => {
             setProfile(profiles[0])
         })
+    }
+
+    const handleClick = () => {
+        props.history.push(`/account/edit/${profile.id}`)
     }
 
     useEffect(getProfile, [image])
@@ -51,6 +56,9 @@ export default function Account(props) {
             <p>{profile.about}</p>
             <p>{profile.likes}</p>
             <p>{profile.user.date_joined}</p>
+            <Link to={`/account/edit/${profile.id}`}>
+                <Button onClick={handleClick}>Edit Profile Info</Button>
+            </Link>
             <Button>Friend Requests</Button>
             <Button>Friends</Button>
         </>

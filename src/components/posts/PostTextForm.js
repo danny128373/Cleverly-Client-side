@@ -67,11 +67,11 @@ export default function PostTextForm (props) {
                         required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="image">Image</label>
+                    <label htmlFor="image">Content</label>
                     <input ref={image} id='image' type="text"
                         name="image"
                         className="form-control"
-                        placeholder="image"
+                        placeholder="Content"
                     />
                 </fieldset>
                 <fieldset>
