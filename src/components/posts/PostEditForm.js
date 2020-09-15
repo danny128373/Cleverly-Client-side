@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function PostEditForm(props) {
 
     const [profile, setProfile] = useState({user:{}})
-    const [title, setTitle] = useState("") 
+    const title = useRef()
     const content = useRef()  
     const [image, setImage] = useState("")
     const [post, setPost] = useState({})
@@ -31,10 +31,6 @@ export default function PostEditForm(props) {
         })
     }
 
-    const handleFieldChange = event => {
-        setTitle(event.target.value)
-      }
-
     const uploadImage = async event => {
         const files = event.target.files
         const data = new FormData()
@@ -58,24 +54,27 @@ export default function PostEditForm(props) {
         })
     }
 
-    const updatePost = () => {
+    const updatePost = (e) => {
+        e.preventDefault()
         const updatedPost = {
-           ...post,
-           title: title,
+           id: post.id,
+           title: title.current.value,
            content: image
         }
         ApiManager.update(updatedPost, 'posts').then(e => {
-            props.history.push(`/posts/${props.postId}`)
+            props.history.push(`/posts/${post.id}`)
           })
     }
 
-    const updatePostWithText = () => {
+    const updatePostWithText = (e) => {
+        e.preventDefault()
         const updatedPost = {
-            title: title,
+            id: post.id,
+            title: title.current.value,
             content: content.current.value
          }
          ApiManager.update(updatedPost, 'posts').then(e => {
-             props.history.push(`/posts/${props.postId}`)
+             props.history.push(`/posts/${post.id}`)
            })
     }
 
@@ -86,11 +85,13 @@ export default function PostEditForm(props) {
 
     return (
         <>
+        <form>
             <h2>Edit Post</h2>
             <fieldset>
                 <label>Title:</label>
-                <input id="title" onChange={handleFieldChange} type="text" defaultValue={post.title} />
+                <input id="title"ref={title} type="text" defaultValue={post.title} />
             </fieldset>
+        </form>
             
             {isImage ?
             <>
@@ -116,6 +117,7 @@ export default function PostEditForm(props) {
                 </fieldset>
                 <Link><Button id="profileEditSubmitButton" onClick={updatePostWithText}>Submit Changes</Button></Link>
             </>
+            
             }
         </>
     )

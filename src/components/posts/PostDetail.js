@@ -38,7 +38,7 @@ export default function PostDetail(props) {
         props.history.push(`/posts/edit/${props.postId}`)
     }
 
-    useEffect(getProfile, [])
+    useEffect(getProfile, [post])
     useEffect(getPost,[])
     useEffect(isEditPostImage, [post])
 
