@@ -126,5 +126,12 @@ export default {
             body: JSON.stringify(object)
         })  
     },
-
+    delete(id, collection) {
+        return fetch(`${remoteURL}/${collection}/${id}`, {
+            "method": "DELETE",
+            "headers": {
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+    }
 }

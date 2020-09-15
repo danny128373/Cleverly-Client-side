@@ -39,7 +39,7 @@ export default function CommentList(props) {
                 post_id: props.postId
             }
             ApiManager.postNewComment(newComment)
-            .then(getComments)
+            .then(getComments).then(setModal(!modal))
         }
     }
 
@@ -48,7 +48,7 @@ export default function CommentList(props) {
 
     return (
         <>
-            {comments.map(comment => <CommentCard comment={comment} {...props}/>)}
+            {comments.map(comment => <CommentCard getComments={getComments} comment={comment} profile={profile} postId= {props.postId} {...props}/>)}
             
             <button onClick={toggle}>
                 Post a comment?
