@@ -42,16 +42,15 @@ export default function Account(props) {
         <>
             <h1>Account Details</h1>
             <img alt='profile image' src={profile.profile_image}/>
-            <label className="labelFile" htmlFor="file">
-                Upload Picture
+            <label className="labelFile" htmlFor="file">Upload Picture</label>
             <input
-            id="file"
-            type="file"
-            name="file"
-            placeholder="Upload Image"
-            onChange={uploadImage}
+                id="file"
+                type="file"
+                name="file"
+                placeholder="Upload Image"
+                onChange={uploadImage}
             />
-            </label>
+            
             <h3>{profile.first_name} {profile.user.last_name}</h3>
             <p>{profile.about}</p>
             <p>{profile.likes}</p>

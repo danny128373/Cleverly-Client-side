@@ -4,7 +4,6 @@ import ApiManager from '../../api/ApiManager'
 import { Button } from 'reactstrap'
 
 export default function AccountEditForm(props) {
-    // try useref for this editttttttttt
 
     const [profile, setProfile] = useState({user:{}})
     const first_name = useRef()
@@ -31,7 +30,6 @@ export default function AccountEditForm(props) {
             last_name: last_name.current.value,
             about: profile.about
         }
-        console.log(stateToPost)
         ApiManager.update(stateToPost, 'profiles').then(e => {
           props.history.push('/account')
         })
