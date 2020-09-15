@@ -4,7 +4,7 @@ import CommentList from '../comments/CommentList'
 
 export default function PostDetail(props) {
 
-    const [post, setPost] = useState({profile:{user:{}}})
+    const [post, setPost] = useState({profile:{user:{}}, community:{profile:{user:{}}}})
     const [profile, setProfile] = useState({user:{}})
     const [isImage, setIsImage] = useState(true)
 
@@ -38,14 +38,15 @@ export default function PostDetail(props) {
         props.history.push(`/posts/edit/${props.postId}`)
     }
 
-    useEffect(getProfile, [post])
+    useEffect(getProfile, [])
     useEffect(getPost,[])
     useEffect(isEditPostImage, [post])
 
     return (
         <>
-            <h2>{post.title}</h2>
+            <h2>Title: {post.title}</h2>
             <p>By: {post.profile.user.username}</p>
+            <p>Community: {post.community.name}</p>
             {isImage ?
             <img alt='postContent' src={post.content}/>
             : <h4>{post.content}</h4>}
