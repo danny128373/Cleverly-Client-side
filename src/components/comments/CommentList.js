@@ -7,7 +7,7 @@ export default function CommentList(props) {
 
     const [comments, setComments] = useState([{post:{}, profile:{user:{}}}])
     const [modal, setModal] = useState(false)
-    const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState({user:{}})
     const comment = useRef()
 
     const getComments = () => {
@@ -48,7 +48,7 @@ export default function CommentList(props) {
 
     return (
         <>
-            {comments.map(comment => <CommentCard getComments={getComments} comment={comment} profile={profile} postId= {props.postId} {...props}/>)}
+            {comments.map(comment => <CommentCard getComments={getComments} comment={comment} profile={profile} postId={props.postId} {...props}/>)}
             
             <button onClick={toggle}>
                 Post a comment?
