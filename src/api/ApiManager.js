@@ -71,6 +71,26 @@ export default {
         })
             .then(response => response.json())
     },
+    get(object, collection) {
+        return fetch(`${remoteURL}/${collection}/${object.id}`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
+    getAll(collection) {
+        return fetch(`${remoteURL}/${collection}`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("cleverly_token")}`
+            }
+        })
+            .then(response => response.json())
+    },
     postNewPost(post) {
         return fetch(`${remoteURL}/posts`, {
             method: 'POST',
@@ -113,6 +133,17 @@ export default {
                 "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
             },
             body: JSON.stringify(community)
+        })
+    },
+    post(object, collection) {
+        return fetch(`${remoteURL}/${collection}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('cleverly_token')}`
+            },
+            body: JSON.stringify(object)
         })
     },
     update(object, collection) {
