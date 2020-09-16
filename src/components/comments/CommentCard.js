@@ -7,9 +7,8 @@ export default function CommentCard(props) {
     const [isUserComment, setIsUserComment] = useState(false)
     const content = useRef()
     const [modal, setModal] = useState(false)
-    const [commentLikes, setCommentLikes] = useState(0)
-    const [showLike, setShowLike] = useState(true)
-    const [profilelikescomment, setProfileLikesComment] = useState([])
+    const [totalLikes, setTotalLikes] = useState(0)
+    const [currentUserCommentRelationship, setCurrentUserCommentRelationship] = useState({id: 0, status:'',comment:{}, profile:{user:{}}})
 
     const toggle = () => {
         setModal(!modal)
@@ -32,56 +31,76 @@ export default function CommentCard(props) {
     }
 
     const likeHandler = () => {
-        ApiManager.post({profile_id: props.profile.id, comment_id: props.comment.id, status:'like'}, 'profilelikescomments').then(getCommentLikes)
+        if (currentUserCommentRelationship.id === 0) {
+            ApiManager.post({comment_id: props.comment.id, profile_id: props.profile.id, status: 'likes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        }
+        if(currentUserCommentRelationship.status === 'dislikes') {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'likes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+
+        }
     }
 
-    const unlikeHandler = (e) => {
-        try {
-            if (profilelikescomment.id != undefined) {
-                ApiManager.delete(profilelikescomment.id, 'profilelikescomments').then(getCommentLikes)
+    const dislikeHandler = () => {
+        if (currentUserCommentRelationship.id === 0) {
+            ApiManager.post({comment_id: props.comment.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        }
+        if(currentUserCommentRelationship.status === 'likes') {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        }
+    }
+
+    const getAllProfileLikesCommentRelationships = () => {
+        ApiManager.getAll('profilelikescomments')
+        .then(profilelikescomments => {
+            const currentStatus = profilelikescomments.find(relationship => relationship.profile.id === props.profile.id && relationship.comment.id === props.comment.id)
+            const likes = profilelikescomments.filter(relationship => props.comment.id === relationship.comment.id && relationship.status === 'likes')
+            const dislikes = profilelikescomments.filter(relationship => props.comment.id === relationship.comment.id && relationship.status === 'dislikes')
+            setTotalLikes(likes.length-dislikes.length)
+            if (currentStatus) {
+                setCurrentUserCommentRelationship(currentStatus)
+            } else {
+                setCurrentUserCommentRelationship({id: 0, status:'',comment:{}, profile:{user:{}}})
             }
-        }
-        catch(error) {
-            console.log(error)
-        }
+        })
+        .then(props.getComments)
     }
 
     const checkUserComment = () => {
-        if (props.profile.id === props.comment.profile.id && props.comment.profile.id != undefined) {
+        if (props.profile.id === props.comment.profile.id && props.comment.profile.id !== undefined) {
             setIsUserComment(true)
         } else {
             setIsUserComment(false)
         }
     }
 
-    const getCommentLikes = () => {
-        ApiManager.getAll('profilelikescomments').then(commentLikes => {
-            const isLikedByCurrentUser = commentLikes.filter(commentLike => commentLike.profile.id === props.profile.id && commentLike.comment.id === props.comment.id)
-            const totalLikesForComment = commentLikes.filter(commentLike => commentLike.comment.id === props.comment.id) 
-            setCommentLikes(totalLikesForComment.length)
-            if (isLikedByCurrentUser.length > 0) {
-                setShowLike(false)
-                setProfileLikesComment(isLikedByCurrentUser)
-            }
-        })
-    }
 
     useEffect(checkUserComment, [isUserComment])
-    useEffect(getCommentLikes, [])
+    useEffect(getAllProfileLikesCommentRelationships, [props.profile])
+    useEffect(props.getComments, [currentUserCommentRelationship])
 
     return (
         <div>
             <p>{props.comment.profile.user.username}</p>
             <p>{props.comment.content}</p>
-            {showLike ? 
-                <button onClick={likeHandler}>
-                    Like
-                </button>
-            : 
-                <button onClick={unlikeHandler}>
-                    Unlike
-                </button>
-            }
+            {!isUserComment ?
+                <>
+                    <button onClick={likeHandler}>
+                        Like
+                    </button>
+                    <button onClick={dislikeHandler}>
+                        Dislike
+                    </button>
+                </>
+            : null}
+            
             {isUserComment ? 
                 <>
                     <button onClick={toggle}>
@@ -93,7 +112,7 @@ export default function CommentCard(props) {
                     </button>
                 </>
             : null}
-            <p>Number of likes: {commentLikes}</p>
+            <p>Number of likes: {totalLikes}</p>
             {modal ?
             <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Edit Comment</ModalHeader>

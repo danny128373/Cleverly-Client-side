@@ -43,12 +43,12 @@ export default function CommentList(props) {
         }
     }
 
-    useEffect(getComments, [])
+    useEffect(getComments, [props.postId])
     useEffect(getProfile, [])
 
     return (
         <>
-            {comments.map(comment => <CommentCard getComments={getComments} comment={comment} profile={profile} postId={props.postId} {...props}/>)}
+            {comments.map(comment => <CommentCard key={`card--${comment.id}`} getComments={getComments} comment={comment} profile={profile} postId={props.postId} {...props}/>)}
             
             <button onClick={toggle}>
                 Post a comment?
