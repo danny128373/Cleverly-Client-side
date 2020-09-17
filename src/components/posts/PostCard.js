@@ -6,7 +6,7 @@ export default function PostCard (props) {
 
     const [totalLikes, setTotalLikes] = useState(0)
     const [isUserPost, setIsUserPost] = useState(false)
-    const [post, setPost] = useState({profile:{}, content: '', title: ''})
+    const [post, setPost] = useState({id: 0, profile:{}, content: '', title: ''})
     const [currentUserReaction, setCurrentUserReaction] = useState({id: 0, status:'',post:{}, profile:{user:{}}})
     const [profile, setProfile] = useState({user:{}})
 
@@ -33,20 +33,21 @@ export default function PostCard (props) {
     }
 
     const likeHandler = () => {
+        console.log(currentUserReaction)
         if (currentUserReaction.id === 0) {
-            ApiManager.post({post_id: post.id, profile_id: props.profile.id, status: 'likes'}, 'profilepostreactions')
+            ApiManager.post({post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else if (currentUserReaction.status === 'dislikes') {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'likes'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else if (currentUserReaction.status === 'likes') {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'neutral'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'neutral'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'likes'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         }
@@ -54,29 +55,32 @@ export default function PostCard (props) {
 
     const dislikeHandler = () => {
         if (currentUserReaction.id === 0) {
-            ApiManager.post({post_id: post.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilepostreactions')
+            ApiManager.post({post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else if(currentUserReaction.status === 'likes') {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else if(currentUserReaction.status === 'dislikes') {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'neutral'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'neutral'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         } else {
-            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilepostreactions')
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
             .then(getPost)
             .then(getAllProfilePostReactions)
         }
     }
 
     const getPost = () => {
-        ApiManager.get(props.post, 'posts')
-        .then(post => {
-            setPost(post)
-        })
+        if (props.post.id > 0) {
+            ApiManager.get(props.post, 'posts')
+        .then(post => setPost(post))
+        } else {
+            setPost({id: 0, profile:{}, content: '', title: ''})
+        }
+        
     }
 
     const checkUserPost = () => {
@@ -100,7 +104,7 @@ export default function PostCard (props) {
                 <img alt='content' className='postImage' src={props.post.content}/>
             </div>
             <p>Likes: {totalLikes}</p>
-            {isUserPost ? 
+            {!isUserPost ? 
                 <>
                 <button onClick={likeHandler}>
                     Like
