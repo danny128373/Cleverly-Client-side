@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 
 function Navbar(props) {
 
