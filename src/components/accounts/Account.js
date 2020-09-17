@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Button } from "reactstrap"
 import ApiManager from '../../api/ApiManager'
 import { Link } from 'react-router-dom'
+import './account.css'
 
 export default function Account(props) {
 
@@ -38,23 +39,37 @@ export default function Account(props) {
 
     useEffect(getProfile, [image])
 
+    const dateFormatter = (date) => {
+        try{
+            date = date.substring(5, 7) + '/' + date.substring(8, 10) + '/' + date.substring(0, 4)
+            return date
+        } catch {
+            //ignore date is undefined on first render
+        }
+    }
+
+    useEffect(dateFormatter, [profile])
+
     return (
         <>
             <h1>Account Details</h1>
-            <img alt='profile image' src={profile.profile_image}/>
-            <label className="labelFile" htmlFor="file">Upload Picture</label>
+            <div className='profileImageContainer'>
+                <img alt='profile image' className='profileImage' src={profile.profile_image}/>
+            </div>
+            <label className="labelFile" htmlFor="file">Change Profile Photo</label>
+            <div>
             <input
                 id="file"
                 type="file"
                 name="file"
                 placeholder="Upload Image"
                 onChange={uploadImage}
-            />
-            
-            <h3>{profile.first_name} {profile.user.last_name}</h3>
-            <p>{profile.about}</p>
-            <p>{profile.likes}</p>
-            <p>{profile.user.date_joined}</p>
+                />
+                </div>
+            <h3>Name: {profile.user.first_name} {' '} {profile.user.last_name}</h3>
+            <p>About: {profile.about}</p>
+            <p>Total likes: {profile.likes}</p>
+            <p>Date joined: {dateFormatter(profile.user.date_joined)}</p>
             <Link to={`/account/edit/${profile.id}`}>
                 <Button onClick={handleClick}>Edit Profile Info</Button>
             </Link>
