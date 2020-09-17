@@ -61,7 +61,6 @@ export default function ApplicationViews(props) {
                 )
             }}
         />
-        {!setIsLogged ?
             <Route
                 exact
                 path='/'
@@ -69,8 +68,6 @@ export default function ApplicationViews(props) {
                     return <Main setIsLogged={setIsLogged} {...props} />
                 }}
             />
-        : null}
-        
         <Route
             exact
             path='/account'

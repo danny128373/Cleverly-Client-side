@@ -15,7 +15,7 @@ export default function CommentCard(props) {
     }
 
     const handleDelete = () => {
-        ApiManager.delete(props.comment.id, 'comments').then()
+        ApiManager.delete(props.comment.id, 'comments')
         .then(props.getComments)
     }
 
@@ -81,7 +81,6 @@ export default function CommentCard(props) {
         }
     }
 
-
     useEffect(checkUserComment, [isUserComment])
     useEffect(getAllProfileLikesCommentRelationships, [props.profile])
     useEffect(props.getComments, [currentUserCommentRelationship])
@@ -136,7 +135,6 @@ export default function CommentCard(props) {
             </ModalBody>
           </Modal>
         :null}
-            
         </div>
     )
 }
