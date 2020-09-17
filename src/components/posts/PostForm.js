@@ -18,7 +18,6 @@ export default function PostForm (props) {
 
     const getCommunities = () => {
         ApiManager.getCommunities().then(communities => {
-        console.log('profilecommunity', communities)
         const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
         setCommunities(communitiesByUser)
         })
@@ -63,6 +62,7 @@ export default function PostForm (props) {
             }
             
             ApiManager.postNewPost(post)
+            .then(props.history.push(`/communities/${communityId.community_id}`))
   
         } else {
             

@@ -21,6 +21,10 @@ export default function PostDetail(props) {
         }
     }
 
+    const handleDelete = () => {
+        ApiManager.delete(props.postId, 'posts')
+        .then(props.history.push(props.history.goBack()))
+    }
 
     const getPost = () => {
         ApiManager.getPost(props.postId).then(post => {
@@ -52,7 +56,10 @@ export default function PostDetail(props) {
             : <h4>{post.content}</h4>}
             <h3>Comments</h3>
             {post.profile.id === profile.id ?
-            <button onClick={onClickHandler} >Edit Post</button>
+            <>
+                <button onClick={onClickHandler} >Edit Post</button>
+                <button onClick={handleDelete}>Delete</button>
+            </>
             : null}
             <CommentList {...props} postId={props.postId}/>
         </>

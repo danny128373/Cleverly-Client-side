@@ -46,6 +46,7 @@ export default function PostTextForm (props) {
             }
             
             ApiManager.postNewPost(post)
+            .then(props.history.push(`/communities/${communityId.community_id}`))
   
         } else {
             e.preventDefault()
