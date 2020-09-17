@@ -18,7 +18,6 @@ export default function PostTextForm (props) {
 
     const getCommunities = () => {
         ApiManager.getCommunities().then(communities => {
-        console.log('profilecommunity', communities)
         const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
         setCommunities(communitiesByUser)
         })

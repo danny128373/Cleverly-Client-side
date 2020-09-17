@@ -35,12 +35,18 @@ export default function CommentCard(props) {
             ApiManager.post({comment_id: props.comment.id, profile_id: props.profile.id, status: 'likes'}, 'profilelikescomments')
             .then(props.getComments)
             .then(getAllProfileLikesCommentRelationships)
-        }
-        if(currentUserCommentRelationship.status === 'dislikes') {
+        } else if (currentUserCommentRelationship.status === 'dislikes') {
             ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'likes'}, 'profilelikescomments')
             .then(props.getComments)
             .then(getAllProfileLikesCommentRelationships)
-
+        } else if (currentUserCommentRelationship.status === 'likes') {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'neutral'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        } else {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'likes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
         }
     }
 
@@ -49,8 +55,15 @@ export default function CommentCard(props) {
             ApiManager.post({comment_id: props.comment.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilelikescomments')
             .then(props.getComments)
             .then(getAllProfileLikesCommentRelationships)
-        }
-        if(currentUserCommentRelationship.status === 'likes') {
+        } else if(currentUserCommentRelationship.status === 'likes') {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        } else if(currentUserCommentRelationship.status === 'dislikes') {
+            ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'neutral'}, 'profilelikescomments')
+            .then(props.getComments)
+            .then(getAllProfileLikesCommentRelationships)
+        } else {
             ApiManager.update({id: currentUserCommentRelationship.id, comment_id: props.comment.id, profile_id: props.profile.id, status: 'dislikes'}, 'profilelikescomments')
             .then(props.getComments)
             .then(getAllProfileLikesCommentRelationships)

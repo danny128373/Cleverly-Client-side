@@ -25,8 +25,17 @@ function Navbar(props) {
             <ModalBody>
             <form className="col-8 offset-2 text-left">
                 <div className="form-group">
-                    <Link to="/newpostimage" toggle={toggle}><img src="" alt="Image"/></Link>
-                    <Link to="/newposttext" toggle={toggle}><img src="" alt="Text"/></Link>
+                    <Link to="/newpostimage" onClick={() => {
+                        setModal(false)
+                    }} toggle={toggle}><img src="" alt="Image"/></Link>
+                    <Link 
+                        to="/newposttext" 
+                        onClick={() => {
+                            setModal(false)
+                        }} 
+                        toggle={toggle}>
+                        <img src="" alt="Text"/>
+                    </Link>
                 </div>
             </form>
             </ModalBody>
