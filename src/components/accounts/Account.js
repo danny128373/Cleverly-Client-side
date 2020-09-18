@@ -74,7 +74,7 @@ export default function Account(props) {
                 </div>
             <h3>Name: {profile.user.first_name} {' '} {profile.user.last_name}</h3>
             <p>About: {profile.about}</p>
-            <p>Total likes: {profile.likes}</p>
+            {/* <p>Total likes: {profile.likes}</p> */}
             <p>Date joined: {dateFormatter(profile.user.date_joined)}</p>
             <Link to={`/account/edit/${profile.id}`}>
                 <Button onClick={handleClick}>Edit Profile Info</Button>

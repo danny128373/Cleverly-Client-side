@@ -110,9 +110,9 @@ export default function PostDetail(props) {
     }
 
     useEffect(checkUserPost, [isUserPost, profile])
+    useEffect(getAllProfilePostReactions, [profile])
     useEffect(getPost,[currentUserReaction])
     useEffect(isEditPostImage, [post])
-    useEffect(getAllProfilePostReactions, [profile])
     useEffect(getProfile, [])
 
     return (
