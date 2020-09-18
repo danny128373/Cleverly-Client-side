@@ -4,9 +4,12 @@ import CommentList from '../comments/CommentList'
 
 export default function PostDetail(props) {
 
-    const [post, setPost] = useState({profile:{user:{}}, community:{profile:{user:{}}}})
+    const [post, setPost] = useState({id: 0, content: '', title: '', profile:{user:{}}, community:{profile:{user:{}}}})
     const [profile, setProfile] = useState({user:{}})
     const [isImage, setIsImage] = useState(true)
+    const [totalLikes, setTotalLikes] = useState(0)
+    const [currentUserReaction, setCurrentUserReaction] = useState({id: 0, status:'',post:{}, profile:{user:{}}})
+    const [isUserPost, setIsUserPost] = useState(false)
 
     const isEditPostImage = () => {
         try {
@@ -42,9 +45,75 @@ export default function PostDetail(props) {
         props.history.push(`/posts/edit/${props.postId}`)
     }
 
-    useEffect(getProfile, [])
-    useEffect(getPost,[])
+    const likeHandler = () => {
+        if (currentUserReaction.id === 0) {
+            ApiManager.post({post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else if (currentUserReaction.status === 'dislikes') {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else if (currentUserReaction.status === 'likes') {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'neutral'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        }
+    }
+
+    const dislikeHandler = () => {
+        if (currentUserReaction.id === 0) {
+            ApiManager.post({post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else if(currentUserReaction.status === 'likes') {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else if(currentUserReaction.status === 'dislikes') {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'neutral'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        } else {
+            ApiManager.update({id: currentUserReaction.id, post_id: post.id, profile_id: profile.id, status: 'dislikes'}, 'profilepostreactions')
+            .then(getPost)
+            .then(getAllProfilePostReactions)
+        }
+    }
+
+    const checkUserPost = () => {
+        if (profile.id === post.profile.id && post.profile.id !== undefined) {
+            setIsUserPost(true)
+        } else {
+            setIsUserPost(false)
+        }
+    }
+
+    const getAllProfilePostReactions = () => {
+        ApiManager.getAll('profilepostreactions')
+        .then(profilePostReactions => {
+            const currentReaction = profilePostReactions.find(relationship => relationship.profile.id === profile.id && relationship.post.id === post.id)
+            const likes = profilePostReactions.filter(relationship => post.id === relationship.post.id && relationship.status === 'likes')
+            const dislikes = profilePostReactions.filter(relationship => post.id === relationship.post.id && relationship.status === 'dislikes')
+            setTotalLikes(likes.length-dislikes.length)
+            if (currentReaction) {
+                setCurrentUserReaction(currentReaction)
+            } else {
+                setCurrentUserReaction({id: 0, status:'',post:{}, profile:{user:{}}})
+            }
+        })
+        .then(getPost)
+    }
+
+    useEffect(checkUserPost, [isUserPost])
+    useEffect(getPost,[currentUserReaction])
     useEffect(isEditPostImage, [post])
+    useEffect(getAllProfilePostReactions, [profile])
+    useEffect(getProfile, [])
 
     return (
         <>
@@ -54,6 +123,17 @@ export default function PostDetail(props) {
             {isImage ?
             <img alt='postContent' src={post.content}/>
             : <h4>{post.content}</h4>}
+            <p>Likes: {totalLikes}</p>
+            {!isUserPost ? 
+                <>
+                <button onClick={likeHandler}>
+                    Like
+                </button>
+                <button onClick={dislikeHandler}>
+                    Dislike
+                </button>
+            </>
+            : null}
             <h3>Comments</h3>
             {post.profile.id === profile.id ?
             <>

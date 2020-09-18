@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react'
 
 export default function PostList (props) {
 
-    const [posts, setPosts] = useState([{content:"", likes:"", created_at:"",community:{}, profile:{user:{}}}])
+    const [posts, setPosts] = useState([{id: "", content:"", likes:"", created_at:"",community:{}, profile:{user:{}}}])
 
     const getPosts = () => {
         ApiManager.getPosts().then(posts => {
@@ -18,7 +18,7 @@ export default function PostList (props) {
 
     return (
         <>
-            {posts.map(post => <PostCard post={post} {...props}  />)}
+            {posts.map(post => <PostCard key={post.id} getPosts={getPosts} post={post} {...props}  />)}
         </>
     )
 }
