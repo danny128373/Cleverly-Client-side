@@ -33,7 +33,6 @@ export default function PostCard (props) {
     }
 
     const likeHandler = () => {
-        console.log(currentUserReaction)
         if (currentUserReaction.id === 0) {
             ApiManager.post({post_id: post.id, profile_id: profile.id, status: 'likes'}, 'profilepostreactions')
             .then(getPost)
