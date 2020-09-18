@@ -6,6 +6,7 @@ export default function PostCard (props) {
 
     const [totalLikes, setTotalLikes] = useState(0)
     const [isUserPost, setIsUserPost] = useState(false)
+    const [isImage, setIsImage] = useState(true)
     const [post, setPost] = useState({id: 0, profile:{}, content: '', title: ''})
     const [currentUserReaction, setCurrentUserReaction] = useState({id: 0, status:'',post:{}, profile:{user:{}}})
     const [profile, setProfile] = useState({user:{}})
@@ -14,6 +15,19 @@ export default function PostCard (props) {
         ApiManager.getCurrentUser().then(profile => {
             setProfile(profile[0])
         })
+    }
+
+    const isEditPostImage = () => {
+        try {
+            if (post.content.includes('cloudinary')) {
+            setIsImage(true)
+        } else {
+            setIsImage(false)
+        }
+        }
+        catch(error) {
+            //Ignoring since first render post is undefined until useEffect kicks in
+        }
     }
     
     const getAllProfilePostReactions = () => {
@@ -83,25 +97,29 @@ export default function PostCard (props) {
     }
 
     const checkUserPost = () => {
-        if (profile.id === props.post.profile.id && props.post.profile.id !== undefined) {
+        if (props.post.profile.id === profile.id && props.post.profile.id !== undefined) {
             setIsUserPost(true)
         } else {
             setIsUserPost(false)
         }
     }
 
-    useEffect(checkUserPost, [isUserPost])
+    useEffect(checkUserPost, [isUserPost, profile, post])
     useEffect(getAllProfilePostReactions, [profile])
     useEffect(getPost, [currentUserReaction])
     useEffect(getProfile, [])
+    useEffect(isEditPostImage, [post])
     
     return (
         <>
             <h3>{props.post.title}</h3>
             <p>By: {props.post.profile.user.username}</p>
-            <div className='postImageContainer'>
-                <img alt='content' className='postImage' src={props.post.content}/>
-            </div>
+            {isImage ?
+                <div className='postImageContainer'>
+                    <img alt='postContent' className='postImage' src={post.content}/>
+                </div>
+                : <h4>{post.content}</h4>}
+            
             <p>Likes: {totalLikes}</p>
             {!isUserPost ? 
                 <>

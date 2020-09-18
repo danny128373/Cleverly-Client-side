@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -56,7 +56,9 @@ export default function ApplicationViews(props) {
                     <>
                         <h1>Welcome to Cleverly!</h1>
                         <Searchbar handleSearchSubmit={handleSearchSubmit} search={search} {...props}/>
-                        <Home {...props} />
+                        <div className='homeContainer'>
+                            <Home {...props} />
+                        </div>
                     </>
                 )
             }}

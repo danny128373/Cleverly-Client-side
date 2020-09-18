@@ -4,7 +4,7 @@ import CommentList from '../comments/CommentList'
 
 export default function PostDetail(props) {
 
-    const [post, setPost] = useState({id: 0, content: '', title: '', profile:{user:{}}, community:{profile:{user:{}}}})
+    const [post, setPost] = useState({id: 0, content: '', title: '', profile:{id: 0, user:{}}, community:{profile:{user:{}}}})
     const [profile, setProfile] = useState({user:{}})
     const [isImage, setIsImage] = useState(true)
     const [totalLikes, setTotalLikes] = useState(0)
@@ -86,7 +86,7 @@ export default function PostDetail(props) {
     }
 
     const checkUserPost = () => {
-        if (profile.id === post.profile.id && post.profile.id !== undefined) {
+        if (profile.id === post.profile.id && profile.id !== undefined) {
             setIsUserPost(true)
         } else {
             setIsUserPost(false)
@@ -109,7 +109,7 @@ export default function PostDetail(props) {
         .then(getPost)
     }
 
-    useEffect(checkUserPost, [isUserPost])
+    useEffect(checkUserPost, [isUserPost, profile])
     useEffect(getPost,[currentUserReaction])
     useEffect(isEditPostImage, [post])
     useEffect(getAllProfilePostReactions, [profile])
@@ -134,13 +134,13 @@ export default function PostDetail(props) {
                 </button>
             </>
             : null}
-            <h3>Comments</h3>
             {post.profile.id === profile.id ?
             <>
                 <button onClick={onClickHandler} >Edit Post</button>
                 <button onClick={handleDelete}>Delete</button>
             </>
             : null}
+            <h3>Comments</h3>
             <CommentList {...props} postId={props.postId}/>
         </>
     )
