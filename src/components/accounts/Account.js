@@ -37,6 +37,12 @@ export default function Account(props) {
         props.history.push(`/account/edit/${profile.id}`)
     }
 
+    const logout = () => {
+        props.setIsLogged(false)
+        localStorage.removeItem("cleverly_token")
+        props.history.push('/')
+    }
+
     useEffect(getProfile, [image])
 
     const dateFormatter = (date) => {
@@ -75,6 +81,7 @@ export default function Account(props) {
             </Link>
             <Button>Friend Requests</Button>
             <Button>Friends</Button>
+            <Button onClick={logout}>Logout</Button>
         </>
     )
 }

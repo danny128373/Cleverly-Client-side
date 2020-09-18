@@ -7,14 +7,16 @@ export default function Home(props) {
     const [posts, setPosts] = useState([{content:"", likes:"", created_at:"",community:{}, profile:{user:{}}}])
 
     const getPosts = () => {
-        ApiManager.getPosts().then(posts => setPosts(posts))
+        ApiManager.getPosts().then(posts => {
+            setPosts(posts)
+        })
     }
 
     useEffect(getPosts, [])
 
     return (
         <>
-            {posts.map(post => <PostCard {...props} post={post}/>)}
+            {posts.reverse().map(post => <PostCard {...props} post={post}/>)}
         </>
     )
 }
