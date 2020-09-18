@@ -6,9 +6,18 @@
     background: white;
     height: 10%;
     margin-bottom: 0px;
+    flex-direction: column;
   }
 
   .navLink {
     width: 98%;
     padding: 3px;
+  }
+
+  .navbarIcons {
+      width: 50%;
+  }
+
+  .navbar li {
+      width: 22%;
   }

@@ -16,6 +16,7 @@ import SearchResultsCommunity from './components/communities/SearchResultsCommun
 import Searchbar from './components/home/Searchbar'
 import AccountEditForm from './components/accounts/AccountEditForm'
 import PostEditForm from './components/posts/PostEditForm'
+import './components/home/home.css'
 
 
 export default function ApplicationViews(props) {
