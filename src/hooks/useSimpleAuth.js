@@ -3,9 +3,6 @@ import { useState } from 'react'
 const useSimpleAuth = () => {
     const [loggedIn, setIsLoggedIn] = useState(false)
 
-    const isAuthenticated = () =>
-        loggedIn || localStorage.getItem("cleverly_token") !== null
-
     const register = userInfo => {
         return fetch("http://localhost:8000/register/", {
             method: "POST",
@@ -42,12 +39,9 @@ const useSimpleAuth = () => {
             })
     }
 
-    const logout = () => {
-        setIsLoggedIn(false)
-        localStorage.removeItem("cleverly_token")
-    }
+    
 
-    return { isAuthenticated, logout, login, register }
+    return { login, register }
 }
 
 export default useSimpleAuth

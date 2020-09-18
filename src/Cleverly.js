@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Route, withRouter} from 'react-router-dom'
 import ApplicationViews from './ApplicationViews'
 import Navbar from './components/navbar/Navbar'
@@ -7,6 +7,12 @@ function Cleverly(props) {
 
   const [isLogged, setIsLogged] = useState(false)
 
+  const isAuthenticated = () =>
+        isLogged || localStorage.getItem("cleverly_token") !== null
+
+
+  useEffect(isAuthenticated, [])
+  
   return (
     <>
     {isLogged ?

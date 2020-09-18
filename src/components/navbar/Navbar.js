@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
+import './navbar.css'
 
 function Navbar(props) {
 
@@ -12,12 +13,12 @@ function Navbar(props) {
     
 
     return (
-        <ul>
-            <li><Link to="/home">Home</Link></li>
-            <li><Link to="/communities">Communities</Link></li>
-            <li><Link to="/newpost" onClick={toggle}>Post</Link></li>
-            <li><Link to="/messages">Messages</Link></li>
-            <li><Link to="/account">Account</Link></li>
+        <ul className="navbar fixed-bottom">
+            <li><Link to="/home" className="navLink">Home</Link></li>
+            <li><Link to="/communities" className="navLink">Communities</Link></li>
+            <li><Link to="/newpost" className="navLink" onClick={toggle}>Post</Link></li>
+            <li><Link to="/messages" className="navLink">Messages</Link></li>
+            <li><Link to="/account" className="navLink">Account</Link></li>
 
             {modal ?
             <Modal isOpen={modal} toggle={toggle}>

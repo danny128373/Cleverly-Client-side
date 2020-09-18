@@ -1,0 +1,14 @@
+.navbar {
+    display: flex;
+    list-style-type: none;
+    border: #dfdddd 5px solid;
+    flex-wrap: nowrap;
+    background: white;
+    height: 15%;
+    margin-bottom: 0px;
+  }
+
+  .navLink {
+    width: 98%;
+    padding: 3px;
+  }

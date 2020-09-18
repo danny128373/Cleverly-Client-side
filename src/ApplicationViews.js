@@ -56,7 +56,7 @@ export default function ApplicationViews(props) {
                     <>
                         <h1>Welcome to Cleverly!</h1>
                         <Searchbar handleSearchSubmit={handleSearchSubmit} search={search} {...props}/>
-                        <Home setIsLogged={setIsLogged} {...props} />
+                        <Home {...props} />
                     </>
                 )
             }}
@@ -65,7 +65,7 @@ export default function ApplicationViews(props) {
                 exact
                 path='/'
                 render={props => {
-                    return <Main setIsLogged={setIsLogged} {...props} />
+                    return <Main {...props} />
                 }}
             />
         <Route
@@ -79,7 +79,7 @@ export default function ApplicationViews(props) {
             exact
             path='/account/edit/:accountId'
             render={props => {
-                return <AccountEditForm accountId={parseInt(props.match.params.accountId)} setIsLogged={setIsLogged} {...props} />
+                return <AccountEditForm accountId={parseInt(props.match.params.accountId)} {...props} />
             }}
         />
         <Route
