@@ -1,36 +1,54 @@
-import React, { useState, useEffect } from 'react'
-import ApiManager from '../../api/ApiManager'
-import CommunityCard from './CommunityCard'
-import { Button } from 'reactstrap'
-import './community.css'
+import React, { useState, useEffect } from "react";
+import ApiManager from "../../api/ApiManager";
+import CommunityCard from "./CommunityCard";
+import { Button } from "reactstrap";
+import "./community.css";
 
 export default function CommunityList(props) {
+  const [communities, setCommunities] = useState([
+    {
+      profile: {},
+      community: {
+        community: { profile: { id: 0 }, name: "", description: "" },
+        profile: {},
+      },
+    },
+  ]);
+  const [profile, setProfile] = useState({});
 
-    const [communities, setCommunities] = useState([{profile:{}, community:{community:{profile:{id:0}, name:"", description:""}, profile:{}}}])
-    const [profile, setProfile] = useState({})
+  const getProfile = () => {
+    ApiManager.getCurrentUser().then((profile) => {
+      setProfile(profile[0]);
+    });
+  };
 
-    const getProfile = () => {
-        ApiManager.getCurrentUser().then(profile => {
-            setProfile(profile[0])
-        })
-    }
+  const getCommunities = () => {
+    ApiManager.getCommunities().then((communities) => {
+      const communitiesByUser = communities.filter(
+        (community) => community.profile.id === profile.id
+      );
+      setCommunities(communitiesByUser);
+    });
+  };
 
-    const getCommunities = () => {
-        ApiManager.getCommunities().then(communities => {
-        const communitiesByUser = communities.filter(community => community.profile.id === profile.id)
-        setCommunities(communitiesByUser)
-        })
-    }
+  useEffect(getProfile, []);
+  useEffect(getCommunities, [profile]);
 
-    useEffect(getProfile, [])
-    useEffect(getCommunities, [profile])
-
-    return (
-        <>
-        <Button onClick={()=>props.history.push('/createcommunity')}>
-            Create Community
-        </Button>
-        {communities.map(community => <CommunityCard key={community.id} getCommunities={getCommunities} getProfile={getProfile} community={community} {...props} profile={profile} />)}
-        </>
-    )
+  return (
+    <>
+      <Button onClick={() => props.history.push("/createcommunity")}>
+        Create Community
+      </Button>
+      {communities.map((community) => (
+        <CommunityCard
+          key={community.id}
+          getCommunities={getCommunities}
+          getProfile={getProfile}
+          community={community}
+          {...props}
+          profile={profile}
+        />
+      ))}
+    </>
+  );
 }
