@@ -1,6 +1,6 @@
 .cardIcons {
   width: 5%;
-  margin: 1% 2%;
+  margin: 3%;
 }
 
 .communityImagePostCard {
@@ -34,4 +34,13 @@
 .postCardBottomRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.parentPostCardContainer {
+  margin: 3%;
+}
+
+.parentPostCardContainer.card {
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px #888888;
 }

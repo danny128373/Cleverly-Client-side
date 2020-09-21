@@ -1,5 +1,7 @@
 .homeContainer {
-  margin-bottom: 76px;
+  margin-bottom: 62px;
+  background: #d9d9d9;
+  padding: 0.5% 0;
 }
 
 .searchIcon {
@@ -26,6 +28,8 @@
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #737373;
+  height: 0%;
+  margin-bottom: 2%;
 }
 
 .sb-example-1 .searchTerm:focus {
@@ -33,13 +37,15 @@
 }
 
 .sb-example-1 .searchButton {
-  width: 11%;
+  width: 9%;
   border: 2px solid #737373;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
-  font-size: 20px;
+  border-left: none;
+  padding: 1%;
+  height: 1%;
 }
 
 .sb-example-1 .searchButton i {
@@ -48,9 +54,13 @@
 
 .sb-example-1 {
   text-align: -webkit-center;
-  margin-bottom: 4px;
+  margin-bottom: -7px;
 }
 
 .inAppLogo {
-  width: 25%;
+  width: 12%;
+}
+
+.followIcon {
+  width: 13%;
 }

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ApiManager from "../../api/ApiManager";
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
+import "./community.css";
+
 export default function CommunityCard(props) {
   const [modal, setModal] = useState(false);
   const name = useRef();
@@ -57,7 +59,8 @@ export default function CommunityCard(props) {
 
   return (
     <>
-      <div>
+      <div className="communityCardContainer">
+        <p>{props.community.community.name}</p>
         <div className="communityImageContainer">
           <img
             className="communityImage"
@@ -65,33 +68,66 @@ export default function CommunityCard(props) {
             src={props.community.community.image}
           />
         </div>
-        {props.community.community.profile === props.profile.id ? (
-          <input
-            id="file"
-            type="file"
-            name="file"
-            placeholder="Upload Image"
-            onChange={uploadImage}
-          />
-        ) : null}
-        <p>{props.community.community.name}</p>
+
         <p>{props.community.community.description}</p>
+        {props.community.community.profile !== props.profile.id ? (
+          <Link to={`communities/${props.community.community.id}`}>
+            <img
+              alt="Go to community"
+              className="communityIcon"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600700897/Navbar_icons_11_dgus62.png"
+            />
+          </Link>
+        ) : null}
+        <table className="communityIconTable">
+          <th>
+            {props.community.community.profile === props.profile.id ? (
+              <>
+                <td>
+                  <Link to={`communities/${props.community.community.id}`}>
+                    <img
+                      alt="Go to community"
+                      className="communityIcons"
+                      src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600700897/Navbar_icons_11_dgus62.png"
+                    />
+                  </Link>
+                </td>
+                <td>
+                  <img
+                    onClick={toggle}
+                    alt="edit community"
+                    className="communityIcons"
+                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701613/Navbar_icons_12_nhdgeb.png"
+                  />
+                </td>
+                <td>
+                  <img
+                    onClick={handleDelete}
+                    alt="delete community"
+                    className="communityIcons"
+                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701849/Navbar_icons_13_vtg7jt.png"
+                  />
+                </td>
+              </>
+            ) : null}
+          </th>
+        </table>
       </div>
 
-      <Link to={`communities/${props.community.community.id}`}>
-        <button>Go to community!</button>
-      </Link>
-      {props.community.community.profile === props.profile.id ? (
-        <>
-          <button onClick={toggle}>Edit Community</button>
-          <button onClick={handleDelete}>Delete Community</button>
-        </>
-      ) : null}
       {modal ? (
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Edit Community</ModalHeader>
           <ModalBody>
             <form className="col-8 offset-2 text-left">
+              {props.community.community.profile === props.profile.id ? (
+                <input
+                  id="file"
+                  type="file"
+                  name="file"
+                  placeholder="Upload Image"
+                  onChange={uploadImage}
+                />
+              ) : null}
               <fieldset>
                 <label htmlFor="comment"> Name </label>
                 <input

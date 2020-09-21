@@ -175,7 +175,11 @@ function Navbar(props) {
                   }}
                   toggle={toggle}
                 >
-                  <img src="" alt="Image" />
+                  <img
+                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600475622/11_meycnd.png"
+                    className="navbarIcons formatIcons"
+                    alt="Image"
+                  />
                 </Link>
                 <Link
                   to="/newposttext"
@@ -184,7 +188,11 @@ function Navbar(props) {
                   }}
                   toggle={toggle}
                 >
-                  <img src="" alt="Text" />
+                  <img
+                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600657587/Navbar_icons_9_qwdmgt.png"
+                    className="navbarIcons formatIcons"
+                    alt="Text"
+                  />
                 </Link>
               </div>
             </form>
