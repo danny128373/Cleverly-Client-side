@@ -64,39 +64,46 @@ export default function Account(props) {
   useEffect(dateFormatter, [profile]);
 
   return (
-    <>
-      <h1>Account Details</h1>
+    <div className="profileContainer">
       <div className="profileImageContainer">
+        <h1>Account Details</h1>
         <img
           alt="profile image"
           className="profileImage"
           src={profile.profile_image}
         />
       </div>
-      <label className="labelFile" htmlFor="file">
-        Change Profile Photo
-      </label>
-      <div>
-        <input
-          id="file"
-          type="file"
-          name="file"
-          placeholder="Upload Image"
-          onChange={uploadImage}
-        />
+      <div className="profileUploadContainer">
+        <label className="labelFile accountIcons" htmlFor="file">
+          Change Profile Photo
+          <input
+            id="file"
+            type="file"
+            name="file"
+            placeholder="Change Profile"
+            onChange={uploadImage}
+          />
+        </label>
+
+        <Link to={`/account/edit/${profile.id}`}>
+          <label className="labelFile accountIcons" htmlFor="file">
+            Edit Profile Info
+            <input type="file" onClick={handleClick} />
+          </label>
+        </Link>
       </div>
-      <h3>
-        Name: {profile.user.first_name} {profile.user.last_name}
-      </h3>
-      <p>About: {profile.about}</p>
-      {/* <p>Total likes: {profile.likes}</p> */}
-      <p>Date joined: {dateFormatter(profile.user.date_joined)}</p>
-      <Link to={`/account/edit/${profile.id}`}>
-        <Button onClick={handleClick}>Edit Profile Info</Button>
-      </Link>
-      <Button>Friend Requests</Button>
-      <Button>Friends</Button>
-      <Button onClick={logout}>Logout</Button>
-    </>
+      <div className="profileInfoContainer">
+        <h3>
+          {profile.user.first_name} {profile.user.last_name}
+        </h3>
+        <p>About: {profile.about}</p>
+        <p>Date joined: {dateFormatter(profile.user.date_joined)}</p>
+      </div>
+      <div className="logout">
+        <button className=".labelFile accountButtons" onClick={logout}>
+          Logout
+        </button>
+      </div>
+    </div>
   );
 }

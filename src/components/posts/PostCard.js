@@ -224,7 +224,7 @@ export default function PostCard(props) {
             src={props.post.community.image}
             className="communityImagePostCard"
           />
-          <div>#{props.post.community.name}</div>
+          <div># {props.post.community.name}</div>
           <div>By: {props.post.profile.user.username}</div>
         </div>
         <CardTitle className="postCardTitle">{props.post.title}</CardTitle>
