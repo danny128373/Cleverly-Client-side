@@ -173,6 +173,14 @@ export default function ApplicationViews(props) {
         render={(props) => {
           return (
             <>
+              <div>
+                <img
+                  src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600642910/Navbar_icons_8_zyv5hb.png"
+                  alt="logo"
+                  className="inAppLogo"
+                />
+                <span className="appName">Cleverly</span>
+              </div>
               <Searchbar
                 handleSearchSubmit={handleSearchSubmit}
                 search={search}

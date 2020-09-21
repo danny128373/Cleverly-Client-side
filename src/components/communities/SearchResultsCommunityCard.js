@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ApiManager from "../../api/ApiManager";
+import "./community.css";
 
 export default function SearchResultsCommunityCard(props) {
   const [profile, setProfile] = useState([]);
@@ -46,15 +47,19 @@ export default function SearchResultsCommunityCard(props) {
   useEffect(getCommunities, [profile]);
 
   return (
-    <>
+    <div className="communityCardContainer">
+      <p>{props.community.name}</p>
       <div className="communityImageContainer">
         <img alt="pic" className="communityImage" src={props.community.image} />
-        <p>{props.community.name}</p>
-        <p>{props.community.description}</p>
       </div>
+      <p>{props.community.description}</p>
       {profileCommunityRelationship ? (
         <Link to={`communities/${props.community.id}`}>
-          <button>Go to community!</button>
+          <img
+            className="communityIcon"
+            alt="go to community"
+            src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600700897/Navbar_icons_11_dgus62.png"
+          />
         </Link>
       ) : null}
       {!profileCommunityRelationship ? (
@@ -65,6 +70,6 @@ export default function SearchResultsCommunityCard(props) {
           className="followIcon"
         />
       ) : null}
-    </>
+    </div>
   );
 }

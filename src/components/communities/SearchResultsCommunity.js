@@ -3,7 +3,7 @@ import SearchResultsCommunityCard from "./SearchResultsCommunityCard";
 
 export default function SearchResultsCommunity(props) {
   return (
-    <div>
+    <div className="communityListContainer">
       {props.communities.map((community) => (
         <SearchResultsCommunityCard
           {...props}
