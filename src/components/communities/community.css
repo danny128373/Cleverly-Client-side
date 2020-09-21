@@ -1,7 +1,46 @@
+.communityCardContainer {
+  display: grid;
+  margin: 2%;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 5%;
+  box-shadow: 2px 2px #888888;
+}
+
 .communityImage {
-    width: 80%;
+  width: 50%;
+  border-radius: 0.5rem;
 }
 
 .communityImageContainer {
-    width: 80%;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.communityIcon {
+  width: 10%;
+}
+
+.communityListContainer {
+  background: #d9d9d9;
+  margin-bottom: 61px;
+  padding-bottom: 0.5%;
+}
+
+.communityIcons {
+  width: 30%;
+}
+
+.communityIconTable {
+  text-align: center;
+}
+
+.createCommunityContainer {
+  background: white;
+  padding: 3% 5%;
+}
+
+.newCommunityText {
+  color: #0061e3;
+  margin-left: 3.5%;
 }

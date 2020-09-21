@@ -1,6 +1,7 @@
 .homeContainer {
   margin-bottom: 62px;
   background: #d9d9d9;
+  padding: 0.5% 0;
 }
 
 .searchIcon {
@@ -28,6 +29,7 @@
   outline: none;
   color: #737373;
   height: 0%;
+  margin-bottom: 2%;
 }
 
 .sb-example-1 .searchTerm:focus {
@@ -43,6 +45,7 @@
   cursor: pointer;
   border-left: none;
   padding: 1%;
+  height: 1%;
 }
 
 .sb-example-1 .searchButton i {
@@ -51,9 +54,13 @@
 
 .sb-example-1 {
   text-align: -webkit-center;
-  margin-bottom: -12px;
+  margin-bottom: -7px;
 }
 
 .inAppLogo {
   width: 12%;
+}
+
+.followIcon {
+  width: 13%;
 }

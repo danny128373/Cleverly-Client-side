@@ -36,19 +36,30 @@ export default function CommunityList(props) {
 
   return (
     <>
-      <Button onClick={() => props.history.push("/createcommunity")}>
-        Create Community
-      </Button>
-      {communities.map((community) => (
-        <CommunityCard
-          key={community.id}
-          getCommunities={getCommunities}
-          getProfile={getProfile}
-          community={community}
-          {...props}
-          profile={profile}
-        />
-      ))}
+      <div className="communityListContainer">
+        <div
+          onClick={() => props.history.push("/createcommunity")}
+          className="createCommunityContainer"
+        >
+          <img
+            alt="create community"
+            className="communityIcon"
+            src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600704842/Navbar_icons_14_brboww.png"
+          />
+          <span className="newCommunityText">Create New Community</span>
+        </div>
+
+        {communities.map((community) => (
+          <CommunityCard
+            key={community.id}
+            getCommunities={getCommunities}
+            getProfile={getProfile}
+            community={community}
+            {...props}
+            profile={profile}
+          />
+        ))}
+      </div>
     </>
   );
 }

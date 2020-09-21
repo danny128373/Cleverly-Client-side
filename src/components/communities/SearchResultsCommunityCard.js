@@ -58,9 +58,12 @@ export default function SearchResultsCommunityCard(props) {
         </Link>
       ) : null}
       {!profileCommunityRelationship ? (
-        <button onClick={followCommunityHandler}>
-          Follow {props.community.name}
-        </button>
+        <img
+          onClick={followCommunityHandler}
+          src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600697806/Navbar_icons_10_z8cjvg.png"
+          alt="follow"
+          className="followIcon"
+        />
       ) : null}
     </>
   );
