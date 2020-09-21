@@ -1,0 +1,18 @@
+.logo {
+  width: 50%;
+}
+
+.mainPageContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.pageContainer {
+  width: 100%;
+}
+
+.appName {
+  font-size: 2.5em;
+  color: red;
+  font-weight: bold;
+}

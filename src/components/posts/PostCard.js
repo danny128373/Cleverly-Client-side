@@ -8,11 +8,13 @@ import {
   CardText,
   CardImg,
   CardBody,
+  Table,
 } from "reactstrap";
 import "./post.css";
 
 export default function PostCard(props) {
-  const [totalLikes, setTotalLikes] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [isUserPost, setIsUserPost] = useState(false);
   const [isImage, setIsImage] = useState(true);
   const [post, setPost] = useState({
@@ -68,7 +70,8 @@ export default function PostCard(props) {
             props.post.id === relationship.post.id &&
             relationship.status === "dislikes"
         );
-        setTotalLikes(likes.length - dislikes.length);
+        setLikes(likes.length);
+        setDislikes(dislikes.length);
         if (currentReaction) {
           setCurrentUserReaction(currentReaction);
           if (currentReaction.status === "likes") {
@@ -214,21 +217,27 @@ export default function PostCard(props) {
 
   return (
     <>
-      <Card>
-        <CardTitle>{props.post.title}</CardTitle>
-        <CardSubtitle>Community: {props.post.community.name}</CardSubtitle>
-        <CardText>By: {props.post.profile.user.username}</CardText>
-        {isImage ? (
-          <div className="postImageContainer">
-            <CardImg
-              alt="postContent"
-              className="postImage"
-              src={post.content}
-            />
-          </div>
-        ) : (
-          <CardBody>{post.content}</CardBody>
-        )}
+      <Card className="">
+        <div className="communityGridContainer">
+          <img
+            alt="community"
+            src={props.post.community.image}
+            className="communityImagePostCard"
+          />
+          <div>#{props.post.community.name}</div>
+          <div>By: {props.post.profile.user.username}</div>
+        </div>
+        <CardTitle className="postCardTitle">{props.post.title}</CardTitle>
+
+        <div className="postCardContainer">
+          {isImage ? (
+            <div className="postImageContainer">
+              <img alt="postContent" className="postImage" src={post.content} />
+            </div>
+          ) : (
+            <CardBody>{post.content}</CardBody>
+          )}
+        </div>
 
         {!isUserPost ? (
           <div>
@@ -248,7 +257,7 @@ export default function PostCard(props) {
               />
             )}
 
-            {totalLikes}
+            {likes}
             {isDislike ? (
               <img
                 onClick={dislikeHandler}
@@ -264,7 +273,7 @@ export default function PostCard(props) {
                 src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
               />
             )}
-
+            {dislikes}
             <Link to={`/posts/${props.post.id}`}>
               <img
                 alt="comment"
@@ -280,12 +289,13 @@ export default function PostCard(props) {
               alt="upvote"
               src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/13_nrelm7.png"
             />
-            {totalLikes}
+            {likes}
             <img
               className="cardIcons"
               alt="downvote"
               src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
             />
+            {dislikes}
             <Link to={`/posts/${props.post.id}`}>
               <img
                 alt="comment"

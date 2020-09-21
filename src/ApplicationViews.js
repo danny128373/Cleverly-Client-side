@@ -17,6 +17,7 @@ import Searchbar from "./components/home/Searchbar";
 import AccountEditForm from "./components/accounts/AccountEditForm";
 import PostEditForm from "./components/posts/PostEditForm";
 import "./components/home/home.css";
+import "./cleverly.css";
 
 export default function ApplicationViews(props) {
   const setIsLogged = props.setIsLogged;
@@ -34,7 +35,7 @@ export default function ApplicationViews(props) {
   };
 
   return (
-    <>
+    <div className="pageContainer">
       <Route
         exact
         path="/login"
@@ -55,7 +56,15 @@ export default function ApplicationViews(props) {
         render={(props) => {
           return (
             <>
-              <h1>Welcome to Cleverly!</h1>
+              <div>
+                <img
+                  src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600642910/Navbar_icons_8_zyv5hb.png"
+                  alt="logo"
+                  className="inAppLogo"
+                />
+                <span className="appName">Cleverly</span>
+              </div>
+
               <Searchbar
                 handleSearchSubmit={handleSearchSubmit}
                 search={search}
@@ -174,6 +183,6 @@ export default function ApplicationViews(props) {
           );
         }}
       />
-    </>
+    </div>
   );
 }
