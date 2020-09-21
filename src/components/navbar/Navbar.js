@@ -81,7 +81,7 @@ function Navbar(props) {
             <img
               alt="postIcon"
               className="navbarIcons"
-              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600475622/5_jzbrav.png"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600639449/19_blidrh.png"
             />
           </Link>
         </li>
@@ -98,7 +98,7 @@ function Navbar(props) {
               }}
               alt="postIcon"
               className="navbarIcons"
-              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600475622/6_eh8axb.png"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600639449/18_uyoxfd.png"
             />
           </Link>
         </li>

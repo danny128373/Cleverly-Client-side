@@ -1,0 +1,37 @@
+.cardIcons {
+  width: 5%;
+  margin: 1% 2%;
+}
+
+.communityImagePostCard {
+  width: 60%;
+  grid-row: 1 / 3;
+  justify-self: center;
+  padding: 5%;
+}
+
+.communityGridContainer {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 40% 40%;
+}
+
+.postImage {
+  max-width: 538px;
+  max-height: 303px;
+  width: 95%;
+}
+
+.postCardContainer {
+  width: 100%;
+  text-align-last: center;
+}
+
+.postCardTitle {
+  margin-left: 2.5%;
+}
+
+.postCardBottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
