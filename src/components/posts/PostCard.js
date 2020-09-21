@@ -217,7 +217,7 @@ export default function PostCard(props) {
 
   return (
     <>
-      <Card className="">
+      <Card className="parentPostCardContainer">
         <div className="communityGridContainer">
           <img
             alt="community"

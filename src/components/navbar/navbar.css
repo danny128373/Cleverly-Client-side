@@ -1,24 +1,28 @@
 .navbar {
-    display: flex;
-    list-style-type: none;
-    border: #dfdddd 5px solid;
-    flex-wrap: nowrap;
-    background: white;
-    height: 10%;
-    margin-bottom: 0px;
-    flex-direction: column;
-  }
+  display: flex;
+  list-style-type: none;
+  border: #dfdddd 5px solid;
+  flex-wrap: nowrap;
+  background: white;
+  height: 10%;
+  margin-bottom: 0px;
+  flex-direction: column;
+}
 
-  .navLink {
-    width: 98%;
-    padding: 3px;
-  }
+.navLink {
+  width: 98%;
+  padding: 3px;
+}
 
-  .navbarIcons {
-      width: 50%;
-  }
+.navbarIcons {
+  width: 50%;
+}
 
-  .navbar li {
-      width: 22%;
-  }
+.navbar li {
+  width: 22%;
+}
 
+img.navbarIcons.formatIcons {
+  width: 45%;
+  margin: 2%;
+}
