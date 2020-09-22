@@ -224,10 +224,12 @@ export default function PostCard(props) {
             src={props.post.community.image}
             className="communityImagePostCard"
           />
-          <div># {props.post.community.name}</div>
-          <div>By: {props.post.profile.user.username}</div>
+          <div>#{props.post.community.name}</div>
+          <div className="communityTitle">
+            @{props.post.profile.user.username}
+          </div>
         </div>
-        <CardTitle className="postCardTitle">{props.post.title}</CardTitle>
+        <h5 className="postCardTitle">{props.post.title}</h5>
 
         <div className="postCardContainer">
           {isImage ? (

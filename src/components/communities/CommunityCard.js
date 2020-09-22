@@ -60,38 +60,28 @@ export default function CommunityCard(props) {
   return (
     <>
       <div className="communityCardContainer">
-        <p>{props.community.community.name}</p>
-        <div className="communityImageContainer">
-          <img
-            className="communityImage"
-            alt="community"
-            src={props.community.community.image}
-          />
+        <div
+          onClick={() =>
+            props.history.push(`communities/${props.community.community.id}`)
+          }
+          className="communityClickable"
+        >
+          <p className="communityTitle">#{props.community.community.name}</p>
+          <div className="communityImageContainer">
+            <img
+              className="communityImage"
+              alt="community"
+              src={props.community.community.image}
+            />
+          </div>
+
+          <p>{props.community.community.description}</p>
         </div>
 
-        <p>{props.community.community.description}</p>
-        {props.community.community.profile !== props.profile.id ? (
-          <Link to={`communities/${props.community.community.id}`}>
-            <img
-              alt="Go to community"
-              className="communityIcon"
-              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600700897/Navbar_icons_11_dgus62.png"
-            />
-          </Link>
-        ) : null}
         <table className="communityIconTable">
           <th>
             {props.community.community.profile === props.profile.id ? (
               <>
-                <td>
-                  <Link to={`communities/${props.community.community.id}`}>
-                    <img
-                      alt="Go to community"
-                      className="communityIcons"
-                      src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600700897/Navbar_icons_11_dgus62.png"
-                    />
-                  </Link>
-                </td>
                 <td>
                   <img
                     onClick={toggle}

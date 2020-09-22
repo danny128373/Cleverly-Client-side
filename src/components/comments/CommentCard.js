@@ -5,8 +5,12 @@ import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 export default function CommentCard(props) {
   const [isUserComment, setIsUserComment] = useState(false);
   const content = useRef();
+
   const [modal, setModal] = useState(false);
-  const [totalLikes, setTotalLikes] = useState(0);
+  const [isLike, setIsLike] = useState(false);
+  const [isDislike, setIsDislike] = useState(false);
+  const [likes, setLikes] = useState(false);
+  const [dislikes, setDislikes] = useState(false);
   const [
     currentUserCommentRelationship,
     setCurrentUserCommentRelationship,
@@ -153,9 +157,20 @@ export default function CommentCard(props) {
             props.comment.id === relationship.comment.id &&
             relationship.status === "dislikes"
         );
-        setTotalLikes(likes.length - dislikes.length);
+        setLikes(likes.length);
+        setDislikes(dislikes.length);
         if (currentStatus) {
           setCurrentUserCommentRelationship(currentStatus);
+          if (currentStatus.status === "likes") {
+            setIsLike(true);
+          } else {
+            setIsLike(false);
+          }
+          if (currentStatus.status === "dislikes") {
+            setIsDislike(true);
+          } else {
+            setIsDislike(false);
+          }
         } else {
           setCurrentUserCommentRelationship({
             id: 0,
@@ -184,24 +199,92 @@ export default function CommentCard(props) {
   useEffect(props.getComments, [currentUserCommentRelationship]);
 
   return (
-    <div>
-      <p>{props.comment.profile.user.username}</p>
+    <div className="commentCardContainer">
+      <p>@{props.comment.profile.user.username}</p>
       <p>{props.comment.content}</p>
       {!isUserComment ? (
         <>
-          <button onClick={likeHandler}>Like</button>
-          <button onClick={dislikeHandler}>Dislike</button>
-        </>
-      ) : null}
+          {isLike ? (
+            <img
+              onClick={likeHandler}
+              className="cardIcons"
+              alt="upvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600639449/14_sam5lx.png"
+            />
+          ) : (
+            <img
+              alt="upvote"
+              className="cardIcons"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/13_nrelm7.png"
+              onClick={likeHandler}
+            />
+          )}
 
-      {isUserComment ? (
+          {likes}
+          {isDislike ? (
+            <img
+              onClick={dislikeHandler}
+              className="cardIcons"
+              alt="downvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/15_azrceu.png"
+            />
+          ) : (
+            <img
+              onClick={dislikeHandler}
+              className="cardIcons"
+              alt="downvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
+            />
+          )}
+          {dislikes}
+        </>
+      ) : (
         <>
-          <button onClick={toggle}>Edit</button>
+          {isLike ? (
+            <img
+              className="cardIcons"
+              alt="upvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600639449/14_sam5lx.png"
+            />
+          ) : (
+            <img
+              alt="upvote"
+              className="cardIcons"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/13_nrelm7.png"
+            />
+          )}
 
-          <button onClick={handleDelete}>Delete</button>
+          {likes}
+          {isDislike ? (
+            <img
+              className="cardIcons"
+              alt="downvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/15_azrceu.png"
+            />
+          ) : (
+            <img
+              className="cardIcons"
+              alt="downvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
+            />
+          )}
+          {dislikes}
+          <img
+            id="editCommentCard"
+            className="cardIcons"
+            src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701613/Navbar_icons_12_nhdgeb.png"
+            onClick={toggle}
+            Edit
+          />
+
+          <img
+            className="cardIcons"
+            src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701849/Navbar_icons_13_vtg7jt.png"
+            onClick={handleDelete}
+          />
         </>
-      ) : null}
-      <p>Number of likes: {totalLikes}</p>
+      )}
+
       {modal ? (
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Edit Comment</ModalHeader>

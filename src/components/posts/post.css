@@ -19,7 +19,7 @@
 .postImage {
   max-width: 538px;
   max-height: 303px;
-  width: 95%;
+  width: 100%;
 }
 
 .postCardContainer {
@@ -29,6 +29,8 @@
 
 .postCardTitle {
   margin-left: 2.5%;
+  font-weight: bold;
+  font-size: medium;
 }
 
 .postCardBottomRow {
@@ -43,4 +45,15 @@
 .parentPostCardContainer.card {
   border-radius: 0.5rem;
   box-shadow: 2px 2px #888888;
+  padding: 2%;
+}
+
+.postDetailContainer {
+  margin-bottom: 76px;
+  background: #d9d9d9;
+  padding: 2%;
+}
+
+#editPostDetail {
+  margin-left: 54%;
 }

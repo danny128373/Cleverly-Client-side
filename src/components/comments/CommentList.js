@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import ApiManager from "../../api/ApiManager";
 import CommentCard from "./CommentCard";
 import { ModalHeader, Modal, ModalBody, Button } from "reactstrap";
+// import "../communities/community.css";
+import "./comment.css";
 
 export default function CommentList(props) {
   const [comments, setComments] = useState([
