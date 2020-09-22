@@ -27,10 +27,10 @@ export default function PostList(props) {
   useEffect(getPosts, []);
 
   return (
-    <>
+    <div className="postListContainer">
       {posts.map((post) => (
         <PostCard key={post.id} getPosts={getPosts} post={post} {...props} />
       ))}
-    </>
+    </div>
   );
 }

@@ -64,7 +64,9 @@ export default function CommentList(props) {
         />
       ))}
 
-      <button onClick={toggle}>Post a comment?</button>
+      <button className="labelFile" onClick={toggle}>
+        Post a comment?
+      </button>
       {modal ? (
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Write a Comment!</ModalHeader>

@@ -77,9 +77,11 @@ export default function PostTextForm(props) {
           </fieldset>
           <fieldset>
             <label htmlFor="image">Content</label>
-            <input
+            <textarea
               ref={image}
               id="image"
+              rows="4"
+              maxLength="512"
               type="text"
               name="image"
               className="form-control"

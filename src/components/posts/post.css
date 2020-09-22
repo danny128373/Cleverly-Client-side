@@ -63,15 +63,8 @@
   text-align: center;
 }
 
-.communityListTextForm {
-  margin-top: 3%;
-}
-
-.communityFormContainer {
-  margin-bottom: 64px;
-  width: 100%;
-}
-
-.nameCommunityForm {
-  margin-bottom: 3%;
+.postListContainer {
+  margin-bottom: 61px;
+  background: #d9d9d9;
+  padding: 1% 0;
 }

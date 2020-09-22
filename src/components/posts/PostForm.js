@@ -31,7 +31,6 @@ export default function PostForm(props) {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "userImage");
-    console.log(files[0]);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dp5l2gxzh/image/upload",
       {

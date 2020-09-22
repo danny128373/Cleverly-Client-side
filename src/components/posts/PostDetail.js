@@ -220,7 +220,7 @@ export default function PostDetail(props) {
             className="communityImagePostCard"
           />
           <div># {post.community.name}</div>
-          <div>By: {post.profile.user.username}</div>
+          <div>@{post.profile.user.username}</div>
         </div>
         <h5>{post.title}</h5>
 
