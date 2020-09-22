@@ -18,8 +18,6 @@ export default function SearchResultsCommunityCard(props) {
 
   const getCommunities = () => {
     ApiManager.getCommunities().then((communities) => {
-      console.log(communities.length);
-
       const communitiesByUser = communities.filter(
         (communityRel) =>
           communityRel.profile.id === profile.id &&

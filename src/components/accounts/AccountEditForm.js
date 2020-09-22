@@ -35,20 +35,23 @@ export default function AccountEditForm(props) {
   };
 
   return (
-    <>
+    <div className="accountEditFormContainer">
+      <h1 className="profileEditTitle">Profile Edit</h1>
       <form>
         <fieldset>
-          <label>First Name:</label>
+          <label className="labelEditAccount">First Name:</label>
           <input
             id="firstName"
+            className="inputEditAccount"
             ref={first_name}
             type="text"
             defaultValue={profile.user.first_name}
           />
         </fieldset>
         <fieldset>
-          <label>Last Name:</label>
+          <label className="labelEditAccount">Last Name:</label>
           <input
+            className="inputEditAccount"
             id="lastName"
             ref={last_name}
             type="text"
@@ -56,20 +59,29 @@ export default function AccountEditForm(props) {
           />
         </fieldset>
         <fieldset>
-          <label>About:</label>
-          <input
+          <label className="labelEditAccount" htmlFor="about">
+            About Me:
+          </label>
+          <textarea
             id="about"
+            className="inputEditAccount"
             onChange={handleFieldChange}
             type="text"
+            rows="4"
+            maxLength="512"
             defaultValue={profile.about}
           />
         </fieldset>
         <Link>
-          <Button id="profileEditSubmitButton" onClick={updateProfile}>
+          <button
+            className="labelFile"
+            id="profileEditSubmitButton"
+            onClick={updateProfile}
+          >
             Submit Changes
-          </Button>
+          </button>
         </Link>
       </form>
-    </>
+    </div>
   );
 }

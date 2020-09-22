@@ -68,9 +68,6 @@ export default function PostCard(props) {
             props.post.id === relationship.post.id &&
             relationship.status === "dislikes"
         );
-        console.log("currentReaction", currentReaction);
-        console.log("props.post.id", props.post.id);
-        console.log("profile.id", profile.id);
 
         setLikes(likes.length);
         setDislikes(dislikes.length);

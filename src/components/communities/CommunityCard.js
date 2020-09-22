@@ -22,7 +22,6 @@ export default function CommunityCard(props) {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(props.community.community.name);
     const updatedCommunity = {
       ...props.community.community,
       name: name.current.value,

@@ -12,7 +12,7 @@
   display: inline-block;
   padding: 1% 2%;
   cursor: pointer;
-  background-image: linear-gradient(to left, #ff1616, #ff5757, #ffd3d3);
+  background: #0061e3;
   color: white;
   border-radius: 7px;
   box-shadow: 2px 2px #888888;
@@ -35,7 +35,7 @@ input[type="file"] {
   display: inline-block;
   padding: 1% 2%;
   cursor: pointer;
-  background-image: linear-gradient(to left, #ff1616, #ff5757, #ffd3d3);
+  background: #0061e3;
   color: white;
   border-radius: 7px;
   box-shadow: 2px 2px #888888;
@@ -52,4 +52,32 @@ input[type="file"] {
 .profileContainer {
   padding-bottom: 20%;
   padding-top: 2%;
+}
+
+.accountEditFormContainer {
+  padding: 3%;
+  text-align: center;
+}
+
+.inputEditAccount {
+  width: 100%;
+  padding: 2%;
+}
+
+.labelEditAccount {
+  font-weight: bold;
+}
+
+.profileEditTitle {
+  text-align: center;
+}
+
+.needAccount {
+  margin-top: 5%;
+  margin-bottom: 0%;
+}
+
+.slogan {
+  font-size: 21px;
+  margin-bottom: 1%;
 }

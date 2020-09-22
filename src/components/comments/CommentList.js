@@ -64,27 +64,32 @@ export default function CommentList(props) {
         />
       ))}
 
-      <button onClick={toggle}>Post a comment?</button>
+      <button className="labelFile" onClick={toggle}>
+        Post a comment?
+      </button>
       {modal ? (
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Write a Comment!</ModalHeader>
-          <ModalBody>
-            <form className="col-8 offset-2 text-left">
-              <fieldset>
-                <label htmlFor="comment"> Comment </label>
-                <input
-                  ref={comment}
-                  type="text"
-                  name="comment"
-                  className="form-control"
-                  placeholder="comment"
-                  required
-                  autoFocus
-                />
-              </fieldset>
-              <Button onClick={submitHandler}>Post</Button>
-            </form>
-          </ModalBody>
+        <Modal className="commentModalContainer" isOpen={modal} toggle={toggle}>
+          <ModalHeader className="commentTitle" toggle={toggle}>
+            Write a Comment!
+          </ModalHeader>
+          <form className="">
+            <div>
+              <textarea
+                ref={comment}
+                type="text"
+                name="comment"
+                rows="4"
+                maxLength="512"
+                className="commentInput"
+                placeholder="Add a comment"
+                required
+                autoFocus
+              />
+            </div>
+            <button className="labelFile" onClick={submitHandler}>
+              Post
+            </button>
+          </form>
         </Modal>
       ) : null}
     </>

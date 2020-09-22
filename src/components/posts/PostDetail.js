@@ -204,7 +204,7 @@ export default function PostDetail(props) {
       .then(getPost);
   };
 
-  useEffect(checkUserPost, [isUserPost, profile]);
+  useEffect(checkUserPost, [post, isUserPost, profile]);
   useEffect(getAllProfilePostReactions, [profile]);
   useEffect(getPost, [currentUserReaction]);
   useEffect(isEditPostImage, [post]);
@@ -220,7 +220,7 @@ export default function PostDetail(props) {
             className="communityImagePostCard"
           />
           <div># {post.community.name}</div>
-          <div>By: {post.profile.user.username}</div>
+          <div>@{post.profile.user.username}</div>
         </div>
         <h5>{post.title}</h5>
 
@@ -294,9 +294,6 @@ export default function PostDetail(props) {
             </>
           </div>
         )}
-        {/* {post.profile.id === profile.id ? (
-          
-        ) : null} */}
       </Card>
       <Card className="parentPostCardContainer">
         <h3>Comments</h3>

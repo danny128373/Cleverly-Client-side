@@ -17,8 +17,8 @@
 }
 
 .postImage {
-  max-width: 538px;
-  max-height: 303px;
+  max-width: 100%;
+  max-height: 100%;
   width: 100%;
 }
 
@@ -61,17 +61,22 @@
 .postFormContainer {
   margin-top: 3%;
   text-align: center;
+  padding: 2%;
+  margin-bottom: 59px;
 }
 
-.communityListTextForm {
-  margin-top: 3%;
+.postListContainer {
+  margin-bottom: 61px;
+  background: #d9d9d9;
+  padding: 1% 0;
 }
 
-.communityFormContainer {
-  margin-bottom: 64px;
-  width: 100%;
+.commentInput {
+  width: 90%;
+  margin: 5% 5% 0 5%;
+  padding: 2%;
 }
 
-.nameCommunityForm {
-  margin-bottom: 3%;
+.commentTitle {
+  margin-left: 2%;
 }

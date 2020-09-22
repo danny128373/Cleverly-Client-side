@@ -83,7 +83,7 @@ export default function PostEditForm(props) {
 
   return (
     <>
-      <form>
+      <form className="postFormContainer">
         <h2>Edit Post</h2>
         <fieldset>
           <label>Title:</label>
@@ -93,7 +93,7 @@ export default function PostEditForm(props) {
 
       {isImage ? (
         <>
-          <img alt="postContent" src={post.content} />
+          <img alt="postContent" className="postImage" src={post.content} />
           <fieldset>
             <label className="labelFile" htmlFor="file">
               Upload Picture:
@@ -107,9 +107,13 @@ export default function PostEditForm(props) {
             />
           </fieldset>
           <Link>
-            <Button id="profileEditSubmitButton" onClick={updatePost}>
+            <button
+              className="labelFile"
+              id="profileEditSubmitButton"
+              onClick={updatePost}
+            >
               Submit Changes
-            </Button>
+            </button>
           </Link>
         </>
       ) : (

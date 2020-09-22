@@ -22,9 +22,9 @@ export default function Login(props) {
   };
 
   return (
-    <main style={{ textAlign: "center" }}>
+    <main className="loginContainer">
       <form className="form--login" onSubmit={handleLogin}>
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 className="">Login</h1>
         <fieldset>
           <label htmlFor="inputEmail"> Username </label>
           <input
@@ -48,7 +48,9 @@ export default function Login(props) {
           />
         </fieldset>
         <fieldset>
-          <button type="submit">Sign in</button>
+          <button className="labelFile" type="submit">
+            Sign in
+          </button>
         </fieldset>
       </form>
     </main>

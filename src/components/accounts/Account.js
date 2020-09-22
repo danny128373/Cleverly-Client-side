@@ -96,8 +96,13 @@ export default function Account(props) {
         <h3>
           {profile.user.first_name} {profile.user.last_name}
         </h3>
-        <p>About: {profile.about}</p>
-        <p>Date joined: {dateFormatter(profile.user.date_joined)}</p>
+        <p>
+          <span className="labelEditAccount">About Me:</span> {profile.about}
+        </p>
+        <p>
+          <span className="labelEditAccount">Date joined:</span>{" "}
+          {dateFormatter(profile.user.date_joined)}
+        </p>
       </div>
       <div className="logout">
         <button className=".labelFile accountButtons" onClick={logout}>
