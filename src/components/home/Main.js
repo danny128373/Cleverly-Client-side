@@ -10,21 +10,21 @@ export default function Main(props) {
         alt="logo"
         src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600641738/Navbar_icons_7_c5aftc.png"
       />
-      <p>Your memes belong here.</p>
+      <p className="slogan">Your memes belong here.</p>
 
-      <Button
+      <button
         className="labelFile"
         onClick={() => props.history.push("/login")}
       >
         Login
-      </Button>
-      <p>Don't have an account?</p>
-      <Button
+      </button>
+      <p className="needAccount">Don't have an account?</p>
+      <button
         className="labelFile"
         onClick={() => props.history.push("/register")}
       >
         Sign Up
-      </Button>
+      </button>
     </div>
   );
 }

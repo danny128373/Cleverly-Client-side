@@ -62,9 +62,12 @@ export default function PostTextForm(props) {
     <>
       <main className="postFormContainer">
         <form className="form--login">
-          <h1 className="h3 mb-3 font-weight-normal">Post a Meme!</h1>
+          <h1 className="">Post a Meme!</h1>
           <fieldset>
-            <label htmlFor="title"> Title </label>
+            <label htmlFor="title" className="labelEditAccount">
+              {" "}
+              Title:{" "}
+            </label>
             <input
               ref={title}
               type="text"
@@ -76,7 +79,9 @@ export default function PostTextForm(props) {
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="image">Content</label>
+            <label htmlFor="image" className="labelEditAccount">
+              Content:
+            </label>
             <textarea
               ref={image}
               id="image"

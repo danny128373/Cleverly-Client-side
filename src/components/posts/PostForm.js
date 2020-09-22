@@ -78,15 +78,17 @@ export default function PostForm(props) {
     <>
       <main className="postFormContainer">
         <form className="form--login">
-          <h1 className="h3 mb-3 font-weight-normal ">Post a Meme!</h1>
+          <h1 className="">Post a Meme!</h1>
           <fieldset>
-            <label htmlFor="title"> Title </label>
+            <label htmlFor="title" className="labelEditAccount">
+              Title:
+            </label>
             <input
               ref={title}
               type="text"
               name="title"
               className="form-control"
-              placeholder="title"
+              placeholder="Title"
               required
               autoFocus
             />

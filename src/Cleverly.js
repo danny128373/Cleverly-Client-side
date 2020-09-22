@@ -9,7 +9,7 @@ function Cleverly(props) {
   const isAuthenticated = () =>
     isLogged || localStorage.getItem("cleverly_token") !== null;
 
-  useEffect(isAuthenticated, []);
+  useEffect(() => isAuthenticated, []);
 
   return (
     <>
