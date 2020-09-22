@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ApiManager from "../../api/ApiManager";
-import {
-  Card,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-  CardImg,
-  CardBody,
-  Table,
-} from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import "./post.css";
 
 export default function PostCard(props) {
@@ -17,22 +9,28 @@ export default function PostCard(props) {
   const [dislikes, setDislikes] = useState(0);
   const [isUserPost, setIsUserPost] = useState(false);
   const [isImage, setIsImage] = useState(true);
+  const [profile, setProfile] = useState({ id: 0, user: {} });
+  const [isLike, setIsLike] = useState(false);
+  const [isDislike, setIsDislike] = useState(false);
   const [post, setPost] = useState({
     id: 0,
-    community: { name: "" },
-    profile: {},
     content: "",
     title: "",
+    profile: { id: 0, user: {} },
+    community: { name: "" },
   });
   const [currentUserReaction, setCurrentUserReaction] = useState({
     id: 0,
     status: "",
-    post: {},
-    profile: { user: {} },
+    post: {
+      id: 0,
+      content: "",
+      title: "",
+      profile: { id: 0, user: {} },
+      community: { name: "" },
+    },
+    profile: { id: 0, user: {} },
   });
-  const [profile, setProfile] = useState({ user: {} });
-  const [isLike, setIsLike] = useState(false);
-  const [isDislike, setIsDislike] = useState(false);
 
   const getProfile = () => {
     ApiManager.getCurrentUser().then((profile) => {
@@ -70,6 +68,10 @@ export default function PostCard(props) {
             props.post.id === relationship.post.id &&
             relationship.status === "dislikes"
         );
+        console.log("currentReaction", currentReaction);
+        console.log("props.post.id", props.post.id);
+        console.log("profile.id", profile.id);
+
         setLikes(likes.length);
         setDislikes(dislikes.length);
         if (currentReaction) {
@@ -212,8 +214,8 @@ export default function PostCard(props) {
   useEffect(checkUserPost, [isUserPost, profile, post]);
   useEffect(getAllProfilePostReactions, [profile]);
   useEffect(getPost, [currentUserReaction]);
-  useEffect(getProfile, []);
   useEffect(isEditPostImage, [post]);
+  useEffect(getProfile, []);
 
   return (
     <>
