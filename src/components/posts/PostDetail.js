@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ApiManager from "../../api/ApiManager";
 import CommentList from "../comments/CommentList";
+import { Card } from "reactstrap";
 
 export default function PostDetail(props) {
   const [post, setPost] = useState({
@@ -12,7 +13,8 @@ export default function PostDetail(props) {
   });
   const [profile, setProfile] = useState({ user: {} });
   const [isImage, setIsImage] = useState(true);
-  const [totalLikes, setTotalLikes] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [currentUserReaction, setCurrentUserReaction] = useState({
     id: 0,
     status: "",
@@ -20,6 +22,8 @@ export default function PostDetail(props) {
     profile: { user: {} },
   });
   const [isUserPost, setIsUserPost] = useState(false);
+  const [isLike, setIsLike] = useState(false);
+  const [isDislike, setIsDislike] = useState(false);
 
   const isEditPostImage = () => {
     try {
@@ -174,9 +178,20 @@ export default function PostDetail(props) {
             post.id === relationship.post.id &&
             relationship.status === "dislikes"
         );
-        setTotalLikes(likes.length - dislikes.length);
+        setLikes(likes.length);
+        setDislikes(dislikes.length);
         if (currentReaction) {
           setCurrentUserReaction(currentReaction);
+          if (currentReaction.status === "likes") {
+            setIsLike(true);
+          } else {
+            setIsLike(false);
+          }
+          if (currentReaction.status === "dislikes") {
+            setIsDislike(true);
+          } else {
+            setIsDislike(false);
+          }
         } else {
           setCurrentUserReaction({
             id: 0,
@@ -196,30 +211,97 @@ export default function PostDetail(props) {
   useEffect(getProfile, []);
 
   return (
-    <>
-      <h2>Title: {post.title}</h2>
-      <p>By: {post.profile.user.username}</p>
-      <p>Community: {post.community.name}</p>
-      {isImage ? (
-        <img alt="postContent" src={post.content} />
-      ) : (
-        <h4>{post.content}</h4>
-      )}
-      <p>Likes: {totalLikes}</p>
-      {!isUserPost ? (
-        <>
-          <button onClick={likeHandler}>Like</button>
-          <button onClick={dislikeHandler}>Dislike</button>
-        </>
-      ) : null}
-      {post.profile.id === profile.id ? (
-        <>
-          <button onClick={onClickHandler}>Edit Post</button>
-          <button onClick={handleDelete}>Delete</button>
-        </>
-      ) : null}
-      <h3>Comments</h3>
-      <CommentList {...props} postId={props.postId} />
-    </>
+    <div className="postDetailContainer">
+      <Card className="parentPostCardContainer">
+        <div className="communityGridContainer">
+          <img
+            alt="community"
+            src={post.community.image}
+            className="communityImagePostCard"
+          />
+          <div># {post.community.name}</div>
+          <div>By: {post.profile.user.username}</div>
+        </div>
+        <h5>{post.title}</h5>
+
+        {isImage ? (
+          <img className="postImage" alt="postContent" src={post.content} />
+        ) : (
+          <h5>{post.content}</h5>
+        )}
+        {!isUserPost ? (
+          <div>
+            {isLike ? (
+              <img
+                onClick={likeHandler}
+                className="cardIcons"
+                alt="upvote"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600639449/14_sam5lx.png"
+              />
+            ) : (
+              <img
+                onClick={likeHandler}
+                className="cardIcons"
+                alt="upvote"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/13_nrelm7.png"
+              />
+            )}
+
+            {likes}
+            {isDislike ? (
+              <img
+                onClick={dislikeHandler}
+                className="cardIcons"
+                alt="downvote"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/15_azrceu.png"
+              />
+            ) : (
+              <img
+                onClick={dislikeHandler}
+                className="cardIcons"
+                alt="downvote"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
+              />
+            )}
+            {dislikes}
+          </div>
+        ) : (
+          <div>
+            <img
+              className="cardIcons"
+              alt="upvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/13_nrelm7.png"
+            />
+            {likes}
+            <img
+              className="cardIcons"
+              alt="downvote"
+              src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600635732/16_u1qngs.png"
+            />
+            {dislikes}
+            <>
+              <img
+                id="editPostDetail"
+                onClick={onClickHandler}
+                className="cardIcons"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701613/Navbar_icons_12_nhdgeb.png"
+              />
+              <img
+                className="cardIcons"
+                src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701849/Navbar_icons_13_vtg7jt.png"
+                onClick={handleDelete}
+              />
+            </>
+          </div>
+        )}
+        {/* {post.profile.id === profile.id ? (
+          
+        ) : null} */}
+      </Card>
+      <Card className="parentPostCardContainer">
+        <h3>Comments</h3>
+        <CommentList {...props} postId={props.postId} />
+      </Card>
+    </div>
   );
 }

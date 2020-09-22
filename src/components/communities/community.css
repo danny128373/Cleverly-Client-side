@@ -29,7 +29,7 @@
 }
 
 .communityIcons {
-  width: 30%;
+  width: 15%;
 }
 
 .communityIconTable {
@@ -44,4 +44,8 @@
 .newCommunityText {
   color: #0061e3;
   margin-left: 3.5%;
+}
+
+.communityTitle {
+  font-weight: bold;
 }
