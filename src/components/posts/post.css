@@ -57,3 +57,21 @@
 #editPostDetail {
   margin-left: 54%;
 }
+
+.postFormContainer {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.communityListTextForm {
+  margin-top: 3%;
+}
+
+.communityFormContainer {
+  margin-bottom: 64px;
+  width: 100%;
+}
+
+.nameCommunityForm {
+  margin-bottom: 3%;
+}

@@ -60,17 +60,17 @@ export default function PostTextForm(props) {
 
   return (
     <>
-      <main style={{ textAlign: "center" }}>
+      <main className="postFormContainer">
         <form className="form--login">
           <h1 className="h3 mb-3 font-weight-normal">Post a Meme!</h1>
           <fieldset>
-            <label htmlFor="title"> title </label>
+            <label htmlFor="title"> Title </label>
             <input
               ref={title}
               type="text"
               name="title"
               className="form-control"
-              placeholder="title"
+              placeholder="Title"
               required
               autoFocus
             />
@@ -87,7 +87,12 @@ export default function PostTextForm(props) {
             />
           </fieldset>
           <fieldset>
-            <select required onChange={handleCommunityChange} id="communityId">
+            <select
+              className="communityListTextForm"
+              required
+              onChange={handleCommunityChange}
+              id="communityId"
+            >
               <option>Select Community</option>
               {communities.map((community) => (
                 <option key={community.community.id}>
@@ -97,7 +102,9 @@ export default function PostTextForm(props) {
             </select>
           </fieldset>
           <fieldset>
-            <button onClick={onSubmitHandler}>Post</button>
+            <button className="labelFile" onClick={onSubmitHandler}>
+              Post
+            </button>
           </fieldset>
         </form>
       </main>

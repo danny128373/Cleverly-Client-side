@@ -77,11 +77,11 @@ export default function PostForm(props) {
 
   return (
     <>
-      <main style={{ textAlign: "center" }}>
+      <main className="postFormContainer">
         <form className="form--login">
-          <h1 className="h3 mb-3 font-weight-normal">Post a Meme!</h1>
+          <h1 className="h3 mb-3 font-weight-normal ">Post a Meme!</h1>
           <fieldset>
-            <label htmlFor="title"> title </label>
+            <label htmlFor="title"> Title </label>
             <input
               ref={title}
               type="text"
@@ -93,7 +93,10 @@ export default function PostForm(props) {
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="image">Image</label>
+            <img src={image} className="postImage" />
+            <label className="labelFile accountIcons postForm" htmlFor="image">
+              Upload Image
+            </label>
             <input
               onChange={uploadImage}
               id="image"
@@ -114,7 +117,9 @@ export default function PostForm(props) {
             </select>
           </fieldset>
           <fieldset>
-            <button onClick={onSubmitHandler}>Post</button>
+            <button onClick={onSubmitHandler} className="labelFile">
+              Post
+            </button>
           </fieldset>
         </form>
       </main>
