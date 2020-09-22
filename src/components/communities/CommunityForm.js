@@ -46,7 +46,7 @@ export default function CommunityForm(props) {
 
   return (
     <>
-      <main style={{ textAlign: "center" }}>
+      <main className="postFormContainer communityFormContainer">
         <form className="form--login">
           <h1 className="h3 mb-3 font-weight-normal">Create a Community!</h1>
           <fieldset>
@@ -55,20 +55,23 @@ export default function CommunityForm(props) {
               ref={name}
               type="text"
               name="name"
-              className="form-control"
+              className="form-control nameCommunityForm"
               placeholder="name"
               required
               autoFocus
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="image">Image</label>
+            <img src={image} className="communityImageForm" />
+            <label className="labelFile accountIcons postForm" htmlFor="image">
+              Upload Image
+            </label>
             <input
               onChange={uploadImage}
               id="image"
               type="file"
               name="image"
-              className="form-control"
+              className="form-control communityImageForm"
               placeholder="image"
             />
           </fieldset>
@@ -85,7 +88,9 @@ export default function CommunityForm(props) {
           </fieldset>
 
           <fieldset>
-            <button onClick={onSubmitHandler}>Post</button>
+            <button className="labelFile" onClick={onSubmitHandler}>
+              Post
+            </button>
           </fieldset>
         </form>
       </main>

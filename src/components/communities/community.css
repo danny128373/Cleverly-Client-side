@@ -49,3 +49,20 @@
 .communityTitle {
   font-weight: bold;
 }
+
+.communityImageForm {
+  width: 70%;
+}
+
+.communityListTextForm {
+  margin-top: 3%;
+}
+
+.communityFormContainer {
+  margin-bottom: 64px;
+  width: 100%;
+}
+
+.nameCommunityForm {
+  margin-bottom: 3%;
+}
