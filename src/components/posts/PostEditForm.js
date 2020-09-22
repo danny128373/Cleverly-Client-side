@@ -84,56 +84,65 @@ export default function PostEditForm(props) {
   return (
     <>
       <form className="postFormContainer">
-        <h2>Edit Post</h2>
+        <h1>Edit Post</h1>
         <fieldset>
-          <label>Title:</label>
-          <input id="title" ref={title} type="text" defaultValue={post.title} />
+          <div>
+            <label>Title:</label>
+          </div>
+          <textarea
+            id="title"
+            ref={title}
+            type="text"
+            row="4"
+            maxLength="512"
+            className="postTitleTextArea"
+            defaultValue={post.title}
+          />
         </fieldset>
+        {isImage ? (
+          <>
+            <img alt="postContent" className="postImage" src={post.content} />
+            <fieldset>
+              <label className="labelFile" htmlFor="file">
+                Upload Picture
+              </label>
+              <input
+                id="file"
+                type="file"
+                name="file"
+                placeholder="Upload Image"
+                onChange={uploadImage}
+              />
+            </fieldset>
+            <Link>
+              <button
+                className="labelFile"
+                id="profileEditSubmitButton"
+                onClick={updatePost}
+              >
+                Submit Changes
+              </button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <fieldset>
+              <label>Content:</label>
+              <input
+                id="content"
+                ref={content}
+                type="text"
+                defaultValue={post.content}
+              />
+            </fieldset>
+            <Link>
+              <Button id="profileEditSubmitButton" onClick={updatePostWithText}>
+                Submit Changes
+              </Button>
+            </Link>
+          </>
+        )}
       </form>
-
-      {isImage ? (
-        <>
-          <img alt="postContent" className="postImage" src={post.content} />
-          <fieldset>
-            <label className="labelFile" htmlFor="file">
-              Upload Picture:
-            </label>
-            <input
-              id="file"
-              type="file"
-              name="file"
-              placeholder="Upload Image"
-              onChange={uploadImage}
-            />
-          </fieldset>
-          <Link>
-            <button
-              className="labelFile"
-              id="profileEditSubmitButton"
-              onClick={updatePost}
-            >
-              Submit Changes
-            </button>
-          </Link>
-        </>
-      ) : (
-        <>
-          <fieldset>
-            <label>Content:</label>
-            <input
-              id="content"
-              ref={content}
-              type="text"
-              defaultValue={post.content}
-            />
-          </fieldset>
-          <Link>
-            <Button id="profileEditSubmitButton" onClick={updatePostWithText}>
-              Submit Changes
-            </Button>
-          </Link>
-        </>
-      )}
     </>
   );
 }

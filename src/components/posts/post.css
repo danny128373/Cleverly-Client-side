@@ -80,3 +80,8 @@
 .commentTitle {
   margin-left: 2%;
 }
+
+.postTitleTextArea {
+  width: 95%;
+  padding: 2%;
+}
