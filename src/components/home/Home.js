@@ -5,6 +5,7 @@ import PostCard from "../posts/PostCard";
 export default function Home(props) {
   const [posts, setPosts] = useState([
     {
+      id: 0,
       content: "",
       likes: "",
       created_at: "",
@@ -24,7 +25,7 @@ export default function Home(props) {
   return (
     <>
       {posts.reverse().map((post) => (
-        <PostCard {...props} post={post} />
+        <PostCard key={post.id} {...props} post={post} />
       ))}
     </>
   );

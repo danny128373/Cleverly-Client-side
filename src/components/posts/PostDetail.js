@@ -4,6 +4,13 @@ import CommentList from "../comments/CommentList";
 import { Card } from "reactstrap";
 
 export default function PostDetail(props) {
+  const [isLike, setIsLike] = useState(false);
+  const [isDislike, setIsDislike] = useState(false);
+  const [isUserPost, setIsUserPost] = useState(false);
+  const [isImage, setIsImage] = useState(true);
+  const [profile, setProfile] = useState({ id: 0, user: {} });
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [post, setPost] = useState({
     id: 0,
     content: "",
@@ -11,19 +18,12 @@ export default function PostDetail(props) {
     profile: { id: 0, user: {} },
     community: { profile: { user: {} } },
   });
-  const [profile, setProfile] = useState({ user: {} });
-  const [isImage, setIsImage] = useState(true);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
   const [currentUserReaction, setCurrentUserReaction] = useState({
     id: 0,
     status: "",
     post: {},
-    profile: { user: {} },
+    profile: { id: 0, user: {} },
   });
-  const [isUserPost, setIsUserPost] = useState(false);
-  const [isLike, setIsLike] = useState(false);
-  const [isDislike, setIsDislike] = useState(false);
 
   const isEditPostImage = () => {
     try {
