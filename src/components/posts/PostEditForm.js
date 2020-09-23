@@ -13,6 +13,9 @@ export default function PostEditForm(props) {
   const [isImage, setIsImage] = useState(true);
 
   const isEditPostImage = () => {
+    /**
+     * Checks if post content is an image.
+     */
     try {
       if (post.content.includes("cloudinary")) {
         setIsImage(true);
@@ -25,12 +28,18 @@ export default function PostEditForm(props) {
   };
 
   const getPost = () => {
+    /**
+     * Grabs post info
+     */
     ApiManager.getPost(props.postId).then((post) => {
       setPost(post);
     });
   };
 
   const uploadImage = async (event) => {
+    /**
+     * Handles POST to cloudinary and sets state to image with the cloudinary image path.
+     */
     const files = event.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -49,12 +58,18 @@ export default function PostEditForm(props) {
   };
 
   const getProfile = () => {
+    /**
+     * Grabs current user
+     */
     ApiManager.getCurrentUser().then((profiles) => {
       setProfile(profiles[0]);
     });
   };
 
   const updatePost = (e) => {
+    /**
+     * Updates current post with user changes
+     */
     e.preventDefault();
     const updatedPost = {
       id: post.id,
@@ -67,6 +82,9 @@ export default function PostEditForm(props) {
   };
 
   const updatePostWithText = (e) => {
+    /**
+     * Updates current post with user changes
+     */
     e.preventDefault();
     const updatedPost = {
       id: post.id,
@@ -103,7 +121,7 @@ export default function PostEditForm(props) {
         {isImage ? (
           <>
             <img alt="postContent" className="postImage" src={post.content} />
-            {/* <fieldset>
+            <fieldset>
               <label className="labelFile" htmlFor="file">
                 Upload Picture
               </label>
@@ -114,8 +132,7 @@ export default function PostEditForm(props) {
                 placeholder="Upload Image"
                 onChange={uploadImage}
               />
-            </fieldset> */}
-            {/* <Link> */}
+            </fieldset>
             <button
               className="labelFile"
               id="profileEditSubmitButton"
@@ -123,7 +140,6 @@ export default function PostEditForm(props) {
             >
               Submit Changes
             </button>
-            {/* </Link> */}
           </>
         ) : (
           <>

@@ -12,6 +12,9 @@ function Navbar(props) {
   const [onAccount, setOnAccount] = useState(false);
 
   const toggle = () => {
+    /**
+     * Toggles modal for creating a new post
+     */
     setModal(!modal);
   };
 

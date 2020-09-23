@@ -14,12 +14,16 @@ export default function PostTextForm(props) {
   const [isValid, setIsValid] = useState(false);
 
   const getProfile = () => {
+    /**
+     * Fetches current user
+     */
     ApiManager.getCurrentUser().then((profile) => {
       setProfile(profile[0]);
     });
   };
 
   const getCommunities = () => {
+    /**Grabs communities the user is currently following */
     ApiManager.getCommunities().then((communities) => {
       const communitiesByUser = communities.filter(
         (community) => community.profile.id === profile.id
@@ -29,6 +33,9 @@ export default function PostTextForm(props) {
   };
 
   const handleCommunityChange = (event) => {
+    /**
+     * Handles community user is going to be posting on and sets the state to communityId
+     */
     const stateToChange = { ...communityId };
     stateToChange[event.target.id] = event.target.value;
     const community = communities.filter(
@@ -43,6 +50,9 @@ export default function PostTextForm(props) {
   useEffect(getCommunities, [profile]);
 
   const onSubmitHandler = (e) => {
+    /**
+     * Handles postform submission and redirects users to the community they just posted their post in.
+     */
     if (isValid) {
       const post = {
         title: title.current.value,

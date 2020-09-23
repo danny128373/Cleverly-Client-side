@@ -16,6 +16,9 @@ export default function PostList(props) {
   ]);
 
   const getPosts = () => {
+    /**
+     * Fetches all posts of the current community
+     */
     ApiManager.getPosts().then((posts) => {
       const postsByCommunity = posts.filter(
         (post) => post.community.id === props.communityId

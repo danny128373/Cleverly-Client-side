@@ -12,12 +12,16 @@ export default function PostForm(props) {
   const [isValid, setIsValid] = useState(false);
 
   const getProfile = () => {
+    /**
+     * Fetches current user
+     */
     ApiManager.getCurrentUser().then((profile) => {
       setProfile(profile[0]);
     });
   };
 
   const getCommunities = () => {
+    /**Grabs communities the user is currently following */
     ApiManager.getCommunities().then((communities) => {
       const communitiesByUser = communities.filter(
         (community) => community.profile.id === profile.id
@@ -27,6 +31,9 @@ export default function PostForm(props) {
   };
 
   const uploadImage = async (event) => {
+    /**
+     * Handles POST to cloudinary and sets state to image with the cloudinary image path.
+     */
     const files = event.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -43,6 +50,9 @@ export default function PostForm(props) {
   };
 
   const handleCommunityChange = (event) => {
+    /**
+     * Handles community user is going to be posting on and sets the state to communityId
+     */
     const stateToChange = { ...communityId };
     stateToChange[event.target.id] = event.target.value;
     const community = communities.filter(
@@ -57,6 +67,9 @@ export default function PostForm(props) {
   useEffect(getCommunities, [profile]);
 
   const onSubmitHandler = (e) => {
+    /**
+     * Handles postform submission and redirects users to the community they just posted their post in.
+     */
     e.preventDefault();
     if (isValid) {
       const post = {
