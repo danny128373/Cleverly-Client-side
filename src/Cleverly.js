@@ -4,7 +4,7 @@ import ApplicationViews from "./ApplicationViews";
 import Navbar from "./components/navbar/Navbar";
 
 function Cleverly(props) {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
   const isAuthenticated = () =>
     isLogged || localStorage.getItem("cleverly_token") !== null;
