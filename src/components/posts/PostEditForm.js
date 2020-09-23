@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ApiManager from "../../api/ApiManager";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import "../accounts/account.css";
 
 export default function PostEditForm(props) {
   const [profile, setProfile] = useState({ user: {} });
@@ -102,7 +103,7 @@ export default function PostEditForm(props) {
         {isImage ? (
           <>
             <img alt="postContent" className="postImage" src={post.content} />
-            <fieldset>
+            {/* <fieldset>
               <label className="labelFile" htmlFor="file">
                 Upload Picture
               </label>
@@ -113,32 +114,39 @@ export default function PostEditForm(props) {
                 placeholder="Upload Image"
                 onChange={uploadImage}
               />
-            </fieldset>
-            <Link>
-              <button
-                className="labelFile"
-                id="profileEditSubmitButton"
-                onClick={updatePost}
-              >
-                Submit Changes
-              </button>
-            </Link>
+            </fieldset> */}
+            {/* <Link> */}
+            <button
+              className="labelFile"
+              id="profileEditSubmitButton"
+              onClick={updatePost}
+            >
+              Submit Changes
+            </button>
+            {/* </Link> */}
           </>
         ) : (
           <>
             <fieldset>
               <label>Content:</label>
-              <input
+              <textarea
                 id="content"
+                rows="4"
+                className="postTitleTextArea"
+                maxLength="512"
                 ref={content}
                 type="text"
                 defaultValue={post.content}
               />
             </fieldset>
             <Link>
-              <Button id="profileEditSubmitButton" onClick={updatePostWithText}>
+              <button
+                id="profileEditSubmitButton"
+                className="labelFile"
+                onClick={updatePostWithText}
+              >
                 Submit Changes
-              </Button>
+              </button>
             </Link>
           </>
         )}
