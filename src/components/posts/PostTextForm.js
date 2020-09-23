@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import ApiManager from "../../api/ApiManager";
+import "../posts/post.css";
+import "../accounts/account.css";
 
 export default function PostTextForm(props) {
   const title = useRef();
@@ -61,7 +63,7 @@ export default function PostTextForm(props) {
   return (
     <>
       <main className="postFormContainer">
-        <form className="form--login">
+        <form className="">
           <h1 className="">Post a Meme!</h1>
           <fieldset>
             <label htmlFor="title" className="labelEditAccount">
@@ -74,7 +76,6 @@ export default function PostTextForm(props) {
               name="title"
               className="form-control"
               placeholder="Title"
-              required
               autoFocus
             />
           </fieldset>
@@ -89,7 +90,7 @@ export default function PostTextForm(props) {
               maxLength="512"
               type="text"
               name="image"
-              className="form-control"
+              className="postTitleTextArea"
               placeholder="Content"
             />
           </fieldset>

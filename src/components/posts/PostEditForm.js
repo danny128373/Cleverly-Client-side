@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ApiManager from "../../api/ApiManager";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import "../accounts/account.css";
 
 export default function PostEditForm(props) {
   const [profile, setProfile] = useState({ user: {} });
@@ -84,29 +85,37 @@ export default function PostEditForm(props) {
   return (
     <>
       <form className="postFormContainer">
-        <h2>Edit Post</h2>
+        <h1>Edit Post</h1>
         <fieldset>
-          <label>Title:</label>
-          <input id="title" ref={title} type="text" defaultValue={post.title} />
+          <div>
+            <label>Title:</label>
+          </div>
+          <textarea
+            id="title"
+            ref={title}
+            type="text"
+            row="4"
+            maxLength="512"
+            className="postTitleTextArea"
+            defaultValue={post.title}
+          />
         </fieldset>
-      </form>
-
-      {isImage ? (
-        <>
-          <img alt="postContent" className="postImage" src={post.content} />
-          <fieldset>
-            <label className="labelFile" htmlFor="file">
-              Upload Picture:
-            </label>
-            <input
-              id="file"
-              type="file"
-              name="file"
-              placeholder="Upload Image"
-              onChange={uploadImage}
-            />
-          </fieldset>
-          <Link>
+        {isImage ? (
+          <>
+            <img alt="postContent" className="postImage" src={post.content} />
+            {/* <fieldset>
+              <label className="labelFile" htmlFor="file">
+                Upload Picture
+              </label>
+              <input
+                id="file"
+                type="file"
+                name="file"
+                placeholder="Upload Image"
+                onChange={uploadImage}
+              />
+            </fieldset> */}
+            {/* <Link> */}
             <button
               className="labelFile"
               id="profileEditSubmitButton"
@@ -114,26 +123,34 @@ export default function PostEditForm(props) {
             >
               Submit Changes
             </button>
-          </Link>
-        </>
-      ) : (
-        <>
-          <fieldset>
-            <label>Content:</label>
-            <input
-              id="content"
-              ref={content}
-              type="text"
-              defaultValue={post.content}
-            />
-          </fieldset>
-          <Link>
-            <Button id="profileEditSubmitButton" onClick={updatePostWithText}>
-              Submit Changes
-            </Button>
-          </Link>
-        </>
-      )}
+            {/* </Link> */}
+          </>
+        ) : (
+          <>
+            <fieldset>
+              <label>Content:</label>
+              <textarea
+                id="content"
+                rows="4"
+                className="postTitleTextArea"
+                maxLength="512"
+                ref={content}
+                type="text"
+                defaultValue={post.content}
+              />
+            </fieldset>
+            <Link>
+              <button
+                id="profileEditSubmitButton"
+                className="labelFile"
+                onClick={updatePostWithText}
+              >
+                Submit Changes
+              </button>
+            </Link>
+          </>
+        )}
+      </form>
     </>
   );
 }

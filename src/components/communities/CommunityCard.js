@@ -78,28 +78,30 @@ export default function CommunityCard(props) {
         </div>
 
         <table className="communityIconTable">
-          <th>
-            {props.community.community.profile === props.profile.id ? (
-              <>
-                <td>
-                  <img
-                    onClick={toggle}
-                    alt="edit community"
-                    className="communityIcons"
-                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701613/Navbar_icons_12_nhdgeb.png"
-                  />
-                </td>
-                <td>
-                  <img
-                    onClick={handleDelete}
-                    alt="delete community"
-                    className="communityIcons"
-                    src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701849/Navbar_icons_13_vtg7jt.png"
-                  />
-                </td>
-              </>
-            ) : null}
-          </th>
+          <tbody>
+            <th>
+              {props.community.community.profile === props.profile.id ? (
+                <>
+                  <td>
+                    <img
+                      onClick={toggle}
+                      alt="edit community"
+                      className="communityIcons"
+                      src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701613/Navbar_icons_12_nhdgeb.png"
+                    />
+                  </td>
+                  <td>
+                    <img
+                      onClick={handleDelete}
+                      alt="delete community"
+                      className="communityIcons"
+                      src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600701849/Navbar_icons_13_vtg7jt.png"
+                    />
+                  </td>
+                </>
+              ) : null}
+            </th>
+          </tbody>
         </table>
       </div>
 

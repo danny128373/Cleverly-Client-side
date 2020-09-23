@@ -6,6 +6,7 @@ export default function SearchResultsCommunity(props) {
     <div className="communityListContainer">
       {props.communities.map((community) => (
         <SearchResultsCommunityCard
+          key={community.id}
           {...props}
           communities={props.communities}
           community={community}

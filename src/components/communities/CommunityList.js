@@ -51,7 +51,7 @@ export default function CommunityList(props) {
 
         {communities.map((community) => (
           <CommunityCard
-            key={community.id}
+            key={`community--${community.id}`}
             getCommunities={getCommunities}
             getProfile={getProfile}
             community={community}

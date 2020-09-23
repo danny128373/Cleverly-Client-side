@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "reactstrap";
 import "../../cleverly.css";
 
 export default function Main(props) {
@@ -8,7 +7,7 @@ export default function Main(props) {
       <img
         className="logo"
         alt="logo"
-        src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600641738/Navbar_icons_7_c5aftc.png"
+        src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600825002/Navbar_icons_15_lc5icu.png"
       />
       <p className="slogan">Your memes belong here.</p>
 
