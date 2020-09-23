@@ -23,8 +23,12 @@ export default function Login(props) {
 
   return (
     <main className="loginContainer">
+      <img
+        className="logo"
+        alt="logo"
+        src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600887426/Navbar_icons_17_lp2wno.png"
+      />
       <form className="form--login" onSubmit={handleLogin}>
-        <h1 className="">Login</h1>
         <fieldset>
           <label htmlFor="inputEmail"> Username </label>
           <input

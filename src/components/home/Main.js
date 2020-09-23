@@ -2,12 +2,15 @@ import React from "react";
 import "../../cleverly.css";
 
 export default function Main(props) {
+  /**
+   * JSX for main page when user is not logged in.
+   */
   return (
     <div className="mainPageContainer">
       <img
         className="logo"
         alt="logo"
-        src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600825002/Navbar_icons_15_lc5icu.png"
+        src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600887426/Navbar_icons_17_lp2wno.png"
       />
       <p className="slogan">Your memes belong here.</p>
 

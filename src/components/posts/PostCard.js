@@ -33,12 +33,18 @@ export default function PostCard(props) {
   });
 
   const getProfile = () => {
+    /**
+     * Grabs current user that's logged in.
+     */
     ApiManager.getCurrentUser().then((profile) => {
       setProfile(profile[0]);
     });
   };
 
   const isEditPostImage = () => {
+    /**
+     * Checks to see if meme content is text or an image.
+     */
     try {
       if (post.content.includes("cloudinary")) {
         setIsImage(true);
@@ -51,6 +57,10 @@ export default function PostCard(props) {
   };
 
   const getAllProfilePostReactions = () => {
+    /**
+     * Checks if user has already reacted to post.
+     * Fetches number of likes and dislikes of post.
+     */
     ApiManager.getAll("profilepostreactions")
       .then((profilePostReactions) => {
         const currentReaction = profilePostReactions.find(
@@ -96,6 +106,9 @@ export default function PostCard(props) {
   };
 
   const likeHandler = () => {
+    /**
+     * Handles event of user clicking like on a post.
+     */
     if (currentUserReaction.id === 0) {
       ApiManager.post(
         { post_id: post.id, profile_id: profile.id, status: "likes" },
@@ -143,6 +156,9 @@ export default function PostCard(props) {
   };
 
   const dislikeHandler = () => {
+    /**
+     * Handles event of user clicking dislike on a post.
+     */
     if (currentUserReaction.id === 0) {
       ApiManager.post(
         { post_id: post.id, profile_id: profile.id, status: "dislikes" },
@@ -190,6 +206,9 @@ export default function PostCard(props) {
   };
 
   const getPost = () => {
+    /**
+     * Grabs post info and sets it to the state post.
+     */
     if (props.post.id > 0) {
       ApiManager.get(props.post, "posts").then((post) => setPost(post));
     } else {
@@ -198,6 +217,9 @@ export default function PostCard(props) {
   };
 
   const checkUserPost = () => {
+    /**
+     * Checks if user is the user that created the post.
+     */
     if (
       props.post.profile.id === profile.id &&
       props.post.profile.id !== undefined

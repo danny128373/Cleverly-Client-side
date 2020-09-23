@@ -15,6 +15,9 @@ export default function Home(props) {
   ]);
 
   const getPosts = () => {
+    /**
+     * Grabs all posts from CleverlyAPI, API only fetches posts of the community which the user is following.
+     */
     ApiManager.getPosts().then((posts) => {
       setPosts(posts);
     });

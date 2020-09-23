@@ -26,6 +26,9 @@ export default function PostDetail(props) {
   });
 
   const isEditPostImage = () => {
+    /**
+     * Checks if content of post is an image or text.
+     */
     try {
       if (post.content.includes("cloudinary")) {
         setIsImage(true);
@@ -38,28 +41,43 @@ export default function PostDetail(props) {
   };
 
   const handleDelete = () => {
+    /**
+     * Handles event of user selecting the delete icon. Only the post owner has this option.
+     */
     ApiManager.delete(props.postId, "posts").then(
       props.history.push(props.history.goBack())
     );
   };
 
   const getPost = () => {
+    /**
+     * Grabs post info and sets the state of post.
+     */
     ApiManager.getPost(props.postId).then((post) => {
       setPost(post);
     });
   };
 
   const getProfile = () => {
+    /**
+     * Grabs current user that's logged in.
+     */
     ApiManager.getCurrentUser().then((profiles) => {
       setProfile(profiles[0]);
     });
   };
 
   const onClickHandler = () => {
+    /**
+     * Handles event of user clicking on the edit icon. User is sent to PostEditForm. Only post owner has this option.
+     */
     props.history.push(`/posts/edit/${props.postId}`);
   };
 
   const likeHandler = () => {
+    /**
+     * Handles event of user clicking like on post.
+     */
     if (currentUserReaction.id === 0) {
       ApiManager.post(
         { post_id: post.id, profile_id: profile.id, status: "likes" },
@@ -107,6 +125,9 @@ export default function PostDetail(props) {
   };
 
   const dislikeHandler = () => {
+    /**
+     * Handles event of user clicking dislike on post.
+     */
     if (currentUserReaction.id === 0) {
       ApiManager.post(
         { post_id: post.id, profile_id: profile.id, status: "dislikes" },
@@ -154,6 +175,9 @@ export default function PostDetail(props) {
   };
 
   const checkUserPost = () => {
+    /**
+     * Checks if current user is post owner.
+     */
     if (profile.id === post.profile.id && profile.id !== undefined) {
       setIsUserPost(true);
     } else {
@@ -162,6 +186,10 @@ export default function PostDetail(props) {
   };
 
   const getAllProfilePostReactions = () => {
+    /**
+     * Checks if current user has reacted to post.
+     * Grabs total of likes and dislikes of post.
+     */
     ApiManager.getAll("profilepostreactions")
       .then((profilePostReactions) => {
         const currentReaction = profilePostReactions.find(
