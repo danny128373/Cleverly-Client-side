@@ -8,7 +8,6 @@ function Register(props) {
   const lastName = useRef();
   const password = useRef();
   const firstName = useRef();
-  const about = useRef();
   const verifyPassword = useRef();
   const { register } = useSimpleAuth();
 
@@ -21,7 +20,6 @@ function Register(props) {
       last_name: lastName.current.value,
       email: email.current.value,
       password: password.current.value,
-      about: about.current.value,
       profile_image: "",
       likes: 0,
     };
@@ -36,7 +34,6 @@ function Register(props) {
     <form className="registerContainer" onSubmit={handleRegister}>
       <h1 className="">Register</h1>
       <fieldset>
-        {/* <label htmlFor="userName"> Username </label> */}
         <input
           ref={userName}
           type="text"
@@ -48,7 +45,6 @@ function Register(props) {
         />
       </fieldset>
       <fieldset>
-        {/* <label htmlFor="firstName"> First Name </label> */}
         <input
           ref={firstName}
           type="text"
@@ -60,7 +56,6 @@ function Register(props) {
         />
       </fieldset>
       <fieldset>
-        {/* <label htmlFor="lastName"> Last Name </label> */}
         <input
           ref={lastName}
           type="text"
@@ -71,7 +66,6 @@ function Register(props) {
         />
       </fieldset>
       <fieldset>
-        {/* <label htmlFor="inputEmail"> Email address </label> */}
         <input
           ref={email}
           type="email"
@@ -81,19 +75,9 @@ function Register(props) {
           required
         />
       </fieldset>
-      {/* <fieldset>
-        <input
-          ref={about}
-          type="text"
-          name="about"
-          className="registerInputs"
-          placeholder="About"
-          required
-        />
-      </fieldset> */}
+
       <fieldset>
         <fieldset>
-          {/* <label htmlFor="inputPassword"> Password </label> */}
           <input
             ref={password}
             type="password"
@@ -104,7 +88,6 @@ function Register(props) {
           />
         </fieldset>
         <fieldset>
-          {/* <label htmlFor="verifyPassword"> Verify Password </label> */}
           <input
             ref={verifyPassword}
             type="password"
